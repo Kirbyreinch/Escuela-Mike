@@ -1,0 +1,11 @@
+<!-- eliminar-usuarios.component.html -->
+<div class="dialog-container">
+    <div class="dialog-container-center">
+      <h1 class="dialog-title">Confirmación de eliminación</h1>
+      <p class="dialog-text">¿Estás seguro de que deseas eliminar esta escuela?</p>
+      <div class="button-container">
+        <button mat-button (click)="onNoClick()" class="cancel-button">Cancelar</button>
+        <button mat-button (click)="onConfirm()" cdkFocusInitial class="confirm-button">Aceptar</button>
+      </div>
+    </div>
+</div>

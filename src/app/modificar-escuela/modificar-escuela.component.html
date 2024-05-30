@@ -1,0 +1,14 @@
+<div class="dialog-container">
+    <h2 class="dialog-title">Modificar Escuela</h2>
+
+        
+    <div class="dialog-text">
+        <label for="name" class="input-label">Nombre:</label>
+        <input type="text" id="name" [(ngModel)]="nuevoname" class="password-input" placeholder="Nombre del usuario">
+      </div>
+  
+    <div class="button-container">
+      <button class="cancel-button" (click)="cancelar()">Cancelar</button>
+      <button class="confirm-button" (click)="confirmar()">Guardar Cambios</button>
+    </div>
+  </div>

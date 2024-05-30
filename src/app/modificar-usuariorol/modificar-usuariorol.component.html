@@ -1,0 +1,17 @@
+<div class="dialog-container">
+  <h2 class="dialog-title">Modificar Usuario</h2>
+  
+  <select id="rol" [(ngModel)]="nuevorol" name="rol" required>
+    <option value="presidente">Presidente</option>
+    <option value="tesorero">Tesorero</option>
+    <option value="director">Director</option>
+    <option value="supervisor">Supervisor</option>
+  </select>
+
+  <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+  <div class="button-container">
+    <button class="cancel-button" (click)="cancelar()">Cancelar</button>
+    <button class="confirm-button" (click)="confirmar()">Guardar Cambios</button>
+  </div>
+</div>

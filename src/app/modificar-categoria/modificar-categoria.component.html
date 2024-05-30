@@ -1,0 +1,21 @@
+<div class="dialog-container">
+    <h2 class="dialog-title">Modificar Categoría</h2>
+    
+    <div class="dialog-text">
+      <label for="nuevoNombre" class="input-label">Nuevo Nombre:</label>
+      <input type="text" id="nuevoNombre" [(ngModel)]="nuevoNombre" class="password-input" placeholder="Nuevo nombre de la categoría">
+    </div>
+  
+    <div class="dialog-text">
+        <label for="nuevoIdentificador" class="input-label">Nuevo Identificador:</label>
+        <select id="nuevoIdentificador" [(ngModel)]="nuevoIdentificador" class="password-input">
+            <option value="ing">Ingreso</option>
+            <option value="egr">Egreso</option>
+        </select>
+    </div>
+    
+    <div class="button-container">
+      <button class="cancel-button" (click)="cancelar()">Cancelar</button>
+      <button class="confirm-button" (click)="confirmar()">Guardar Cambios</button>
+    </div>
+  </div>

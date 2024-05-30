@@ -1,0 +1,36 @@
+<div class="dialog-container">
+    <h2 class="dialog-title">Modificar Usuario</h2>
+  
+    <div class="dialog-text">
+      <label for="name" class="input-label">Nombre:</label>
+      <input type="text" id="name" [(ngModel)]="nuevoname" class="password-input" placeholder="Nombre del usuario">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="lastName" class="input-label">Apellido:</label>
+      <input type="text" id="lastName" [(ngModel)]="nuevolast_name" class="password-input" placeholder="Apellido del usuario">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="email" class="input-label">Email:</label>
+      <input type="text" id="email" [(ngModel)]="nuevoemail" class="password-input" placeholder="Email del usuario">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="tel" class="input-label">Teléfono:</label>
+      <input type="text" id="tel" [(ngModel)]="nuevotel" class="password-input" placeholder="Teléfono del usuario">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="escuela" class="input-label">Escuela:</label>
+      <input type="text" id="escuela" [(ngModel)]="nuevoescuela" class="password-input" placeholder="Escuela del usuario">
+    </div>
+  
+
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+    
+    <div class="button-container">
+      <button class="cancel-button" (click)="cancelar()">Cancelar</button>
+      <button class="confirm-button" (click)="confirmar()">Guardar Cambios</button>
+    </div>
+  </div>

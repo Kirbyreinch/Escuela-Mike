@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./crear-categoriaing.component.css">
+    <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container" >
+        <div class="form-row" style="margin-top: 60px ;">
+            <img class="logo"
+            src="https://upload.wikimedia.org/wikipedia/commons/b/b2/UAS_logo.png" 
+            alt="logo uas" >
+            <div class="form-header">
+                <h2>Universidad Autonoma de Sinaloa</h2>
+                <h3>sursum versus</h3>
+                <div class="form-row" style="margin-top: 10px;">
+                    <span class="icons-span"  style="margin: 7;">
+                        <i class="fa fa-phone" aria-hidden="true" style="margin: 5px;"></i>
+                        667 713 3800
+                    </span>
+                    <span class="icons-span" style="margin: 7px;">
+                        <i class="fa fa-envelope" aria-hidden="true" style="margin-right: 5px;"></i>
+                        correoejemplouas.edu.mx
+                    </span>
+                    <span class="icons-span" style="margin: 7px;">
+                        <i class="fa fa-map-marker" aria-hidden="true" style="margin-right: 5px;"></i>
+                        Facultad de ingenieria
+                    </span>
+                </div>
+            </div>
+        </div>
+
+
+        <form (ngSubmit)="onSubmit()" class="container" style="padding: 30px;">
+            <div class="form-row" style="border-bottom: 2px solid lightgray; margin-top: 10px;">
+              <div style="width: 90%;">
+                <h4>Informacion Basica</h4>
+              </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+                <label for="Nombre">Nombre de la categoria:</label>
+                <input type="text" id="Nombre" name="Nombre" [(ngModel)]="categorias.nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="Identificador">Identificador:</label>
+                <input type="text" id="Identificador" name="Identificador" value="Ingreso" readonly>
+            </div>
+        </div>
+        <button type="submit" class="send-form">Añadir</button>
+        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+    </form>
+    </div>
+    
+    <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
+</body>
+</html>

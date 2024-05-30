@@ -1,0 +1,86 @@
+
+<div class=" top-margin">
+  <div class="form-row" style="margin-top: 60px;">
+    <img class="logo" src="https://upload.wikimedia.org/wikipedia/commons/b/b2/UAS_logo.png" alt="logo uas">
+    
+    <div class="form-header">
+      <h2>Universidad Autonoma de Sinaloa</h2>
+      <h3>sursum versus</h3>
+      <div class="form-row" style="margin-top: 10px;">
+        <span class="icons-span" style="margin: 7;">
+          <i class="fa fa-phone" aria-hidden="true" style="margin: 5px;"></i>
+          667 713 3800
+        </span>
+        <span class="icons-span" style="margin: 7px;">
+          <i class="fa fa-envelope" aria-hidden="true" style="margin-right: 5px;"></i>
+          correoejemplouas.edu.mx
+        </span>
+        <span class="icons-span" style="margin: 7px;">
+          <i class="fa fa-map-marker" aria-hidden="true" style="margin-right: 5px;"></i>
+          Facultad de ingenieria
+        </span>
+      </div>
+    </div>
+  </div>
+  <form (ngSubmit)="onSubmit()" class="container" style="padding: 30px;">
+    <div class="form-row" style="border-bottom: 2px solid lightgray; margin-top: 10px;">
+      <div style="width: 90%;">
+        <h4>Informacion Basica</h4>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="name-label">Nombre:</label>
+        <input type="text" id="name" name="name" [(ngModel)]="usuario.name" required>
+      </div>
+      <div class="form-group">
+        <label for="last-name-label">Apellido:</label>
+        <input type="text" id="last-name" name="last-name" [(ngModel)]="usuario.last_name" required>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="number-label">Telefono:</label>
+      <input type="text" id="tel" name="tel" [(ngModel)]="usuario.tel" required>
+    </div>
+    <div class="form-row" style="border-bottom: 2px solid lightgray; margin-top: 10px;">
+      <div style="width: 90%;">
+        <h4>datos de cuenta</h4>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label for="email-label">Email:</label>
+        <input type="email" id="email" name="email" [(ngModel)]="usuario.email" required>
+      </div>
+      <div class="form-group">
+        <label for="pass-label">Contraseña:</label>
+        <input type="password" id="password" name="password" [(ngModel)]="password" required>
+      </div>
+      <div class="form-group">
+        <label for="escuela-label">Escuela:</label>
+        <input type="text" id="escuela" name="escuela" [(ngModel)]="usuario.escuela" required>
+      </div>
+    </div>
+    <div class="form-row" style="border-bottom: 2px solid lightgray; margin-top: 10px;">
+      <div style="width: 90%;">
+        <h4>Informacion de la escuela</h4>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="rol-label">Rol institucional:</label>
+      <select id="rol" [(ngModel)]="rol" name="rol" required>
+        <option value="presidente">Presidente</option>
+        <option value="tesorero">Tesorero</option>
+        <option value="director">Director</option>
+      </select>
+    </div>
+    <button type="submit" class="send-form">Añadir</button>
+    <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  </form>
+
+
+  <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
+</div>
+
+
+
