@@ -1,10 +1,26 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./escuelas.component.css">
     <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
+    <style>
+        /* Establece un ancho fijo para las primeras cuatro columnas */
+        table th:nth-child(-n+4),
+        table td:nth-child(-n+4) {
+            min-width: 150px; /* Ajusta este valor según sea necesario */
+            max-width: 150px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Establece la barra de desplazamiento horizontal */
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
@@ -24,46 +40,62 @@
                     </div>
                 </div>
             </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Escuela</th>
-                        <th>Logo</th>
-                        <th>Clave</th>
-                        <th>Domicilio</th>
-                        <th>
-                            <button class="btn" [routerLink]="['/crear-escuela']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
-                                <i class="fa-solid fa-plus"></i> Registrar
-                            </button>
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr *ngFor="let escuela of escuelas">
-                        <td>{{ escuela.id }}</td>
-                        <td>{{ escuela.nombre }}</td>
-                        <td>{{ escuela.logo }}</td>
-                        <td>{{ escuela.clave }}</td>
-                        <td>{{ escuela.domicilio }}</td>
-                        <td>
-                            <div  style="display: flex; flex-direction: row;">  
-                                <button mat-button (click)="openConfirmationDialog(escuela.nombre)"class="btn" style="background-color: #f44336; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">                                
-                                    <mat-icon>delete</mat-icon> 
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Escuela</th>
+                            <th>Logo</th>
+                            <th>Clave</th>
+                            <th>Domicilio</th>
+                            <th>Localidad</th>
+                            <th>Zona</th>
+                            <th>Sector</th>
+                            <th>Telefono</th>
+                            <th>No Familias</th>
+                            <th>Cuota</th>
+                            <th>Alumnos</th>
+                            <th>Grupos</th>
+                            <th>Turno</th>
+                            <th>
+                                <button class="btn" [routerLink]="['/crear-escuela']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                                    <i class="fa-solid fa-plus"></i> Registrar
                                 </button>
-
-                            <button mat-icon-button (click)="openModificarEscuela(escuela)" class="btn" style="background-color: rgb(223, 223, 26); border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
-                                <mat-icon>settings</mat-icon>
-                            </button>
-                            
-                            </div>
-                      
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let escuela of escuelas">
+                            <td>{{ escuela.id }}</td>
+                            <td>{{ escuela.nombre }}</td>
+                            <td>{{ escuela.logo }}</td>
+                            <td>{{ escuela.clave }}</td>
+                            <td>{{ escuela.domicilio }}</td>
+                            <td>{{ escuela.localidad }}</td>
+                            <td>{{ escuela.zona }}</td>
+                            <td>{{ escuela.sector }}</td>
+                            <td>{{ escuela.telefono }}</td>
+                            <td>{{ escuela.no_familia }}</td>
+                            <td>{{ escuela.cuota }}</td>
+                            <td>{{ escuela.tt_alumnos }}</td>
+                            <td>{{ escuela.tt_grupos }}</td>
+                            <td>{{ escuela.turno }}</td>
+                            <td>
+                                <div style="display: flex; flex-direction: row;">
+                                    <button mat-button (click)="openConfirmationDialog(escuela.nombre)" class="btn" style="background-color: #f44336; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                                        <mat-icon>delete</mat-icon>
+                                    </button>
+                                    <button mat-icon-button (click)="openModificarEscuela(escuela)" class="btn" style="background-color: rgb(223, 223, 26); border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                                        <mat-icon>settings</mat-icon>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
-    <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
 </body>
 </html>

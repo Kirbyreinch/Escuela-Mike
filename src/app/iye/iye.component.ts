@@ -25,6 +25,10 @@ export class IyeComponent implements OnInit {
   filtroEgresos: string = '';
   filtroSeleccionadoEgresos: string = 'id';
 
+
+  fechaInicioEgresos: string = '';
+  fechaFinEgresos: string = '';
+
   constructor(private authService: AuthService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
@@ -74,17 +78,26 @@ export class IyeComponent implements OnInit {
 
   aplicarFiltroEgresos() {
     const filtroMinusculas = this.filtroEgresos.toLowerCase();
+    const fechaInicio = this.fechaInicioEgresos ? new Date(this.fechaInicioEgresos) : null;
+    const fechaFin = this.fechaFinEgresos ? new Date(this.fechaFinEgresos) : null;
+
     this.egresos = this.egresosOriginal.filter(egreso => {
-      switch (this.filtroSeleccionadoEgresos) {
-        case 'id':
-          return egreso.id.toString().toLowerCase().startsWith(filtroMinusculas);
-        case 'nombre':
-          return egreso.nombre.toLowerCase().startsWith(filtroMinusculas);
-        default:
-          return true;
+      let matchesTextFilter = false;
+
+      if (this.filtroSeleccionadoEgresos === 'id') {
+        matchesTextFilter = egreso.id.toString().toLowerCase().startsWith(filtroMinusculas);
+      } else if (this.filtroSeleccionadoEgresos === 'nombre') {
+        matchesTextFilter = egreso.nombre.toLowerCase().startsWith(filtroMinusculas);
+      } else if (this.filtroSeleccionadoEgresos === 'category') {
+        matchesTextFilter = egreso.category.toString().toLowerCase().startsWith(filtroMinusculas);
       }
+
+      const matchesDateFilter = (!fechaInicio || new Date(egreso.fecha) >= fechaInicio) &&
+                                (!fechaFin || new Date(egreso.fecha) <= fechaFin);
+      
+      return matchesTextFilter && matchesDateFilter;
     });
-  }
+}
 
   openConfirmationDialog(user_id: string) {
     console.log('user_id seleccionado:', user_id);

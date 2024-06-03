@@ -62,6 +62,48 @@ export class AuthService {
   }
 
 
+  dashboardingreso(): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/dashboard/get/incomes?school=${escuela}`;
+    return this.http.get<any>(url);
+  }
+
+
+  dashboardingreso_otros(): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/dashboard/get/other_incomes?school=${escuela}`;
+    return this.http.get<any>(url);
+  }
+
+
+
+  dashboardegreso(): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/dashboard/get_all/expenses?school=${escuela}`;
+    return this.http.get<any>(url);
+  }
+
+
+  dashboardegreso_otros(): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/dashboard/get_all/other_expenses?school=${escuela}`;
+    return this.http.get<any>(url);
+  }
+
+
+
   getingreso(): Observable<any> {
     const escuela = localStorage.getItem('escuela');
     if (!escuela) {
@@ -78,7 +120,7 @@ export class AuthService {
     if (!escuela_nombre) {
       throw new Error('No hay ninguna escuela en el localStorage');
     }
-    const url = `${this.apiurl}/expenses/consultar/escuela/{escuela}?school=${escuela_nombre}`;
+    const url = `${this.apiurl}/expenses/consultar/escuela/${escuela_nombre}`;
     return this.http.get<any>(url);
   }
 
@@ -140,11 +182,11 @@ export class AuthService {
     return this.http.post(requestUrl, ing);
   }
 
-  crearegreso(categoriasegr: any): Observable<any> {
-    const requestUrl = `${this.apiurl}/categoria/crear`;
+  crearegreso(egr: any): Observable<any> {
+    const requestUrl = `${this.apiurl}/expenses/create`;
     console.log('Dirección de la solicitud:', requestUrl);
-    console.log('Datos enviados:', categoriasegr);
-    return this.http.post(requestUrl, categoriasegr);
+    console.log('Datos enviados:', egr);
+    return this.http.post(requestUrl, egr);
   }
 
 

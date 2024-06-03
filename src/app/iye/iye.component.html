@@ -82,16 +82,29 @@
                         <select class="combo-box" [(ngModel)]="filtroSeleccionadoEgresos" (change)="aplicarFiltroEgresos()">
                             <option value="id">ID</option>
                             <option value="nombre">Nombre</option>
+                            <option value="category">Categoria</option>
 
                         </select>
                     </div>
+
+
+                    <div class="date-filter-container">
+                        <input type="date" class="date-input" [(ngModel)]="fechaInicioEgresos" (change)="aplicarFiltroEgresos()">
+                        <input type="date" class="date-input" [(ngModel)]="fechaFinEgresos" (change)="aplicarFiltroEgresos()">
+                    </div>
+
                 </div>
                 
+              
+
                 
                 <table>
                     <th>ID</th>
                     <th>Nombre</th>
-                    <th>Identificador</th>
+                    <th>Categoria</th>
+                    <th>Fecha</th>
+                    <th>Monto</th>
+                    <th>Usuario Registrado</th>
 
                     <th>
                         <button class="btn"  [routerLink]="['/crear-egreso']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
@@ -102,10 +115,10 @@
                     <tbody>
                         <tr *ngFor="let egreso of egresos">
                        <td>{{ egreso.id }}</td>
-                       <td>{{ egreso.escuela }}</td>
-                       <td>{{ egreso.categoria }}</td>
-                       <td>{{ egreso.date }}</td>
-                       <td>{{ egreso.amount }}</td>
+                       <td>{{ egreso.escuela_nombre }}</td>
+                       <td>{{ egreso.category }}</td>
+                       <td>{{ egreso.fecha }}</td>
+                       <td>{{ egreso.monto }}</td>
                        <td>{{ egreso.user_register }}</td>
 
                            <td>

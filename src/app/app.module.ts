@@ -39,6 +39,7 @@ import { IyeComponent } from './iye/iye.component';
 import { CrearIngresoComponent } from './crear-ingreso/crear-ingreso.component';
 import { CrearEgresoComponent } from './crear-egreso/crear-egreso.component';
 
+import { NgApexchartsModule } from 'ng-apexcharts';
 
 
 @NgModule({
@@ -72,7 +73,8 @@ import { CrearEgresoComponent } from './crear-egreso/crear-egreso.component';
     ReactiveFormsModule, 
     HttpClientModule,
     FormsModule,
-    MatIconModule
+    MatIconModule,
+    NgApexchartsModule,
    
   
   ],

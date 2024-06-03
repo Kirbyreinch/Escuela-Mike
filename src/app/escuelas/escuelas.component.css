@@ -4,7 +4,7 @@ body {
     color: #252475;
 }
 .container {
-    width: 85%;
+    width: 100%;
     height: fit-content;
     min-height: 350px;
     display: flex;
