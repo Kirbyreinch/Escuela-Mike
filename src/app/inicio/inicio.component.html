@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container" >
-        <div class="form-row" style="margin-top: 60px ;">
+        <div class="form-row" style="margin-top: 80px ;">
             <img class="logo"
             src="https://upload.wikimedia.org/wikipedia/commons/b/b2/UAS_logo.png" 
             alt="logo uas" >
@@ -38,21 +38,121 @@
         <div class="form-row" style="border-bottom: 2px solid lightgray; margin-top: 10px; padding: 5px;">
             <div style="width: 90%;">
                 <h4 >Datos</h4>
+
+
+          
+
             </div>
         </div>
+
         <div class="form-row">
             <div class="form-group">
-              <label for="name">Gráfica de pastel categorías Ingresos:</label>
-              <div id="chartIngresos" style="width: 100%;"></div>
+                <label for="chartTypeIngresos">Gráfica  de categorías Ingresos:</label>
+                <select id="chartTypeIngresos" (change)="onChartTypeChange('ingresos', $event)">
+                    <option value="total">Total Ingresos</option>
+                    <option value="currentMonth">Ingresos del Mes Actual</option>
+                    <option value="1">Ingreso de Enero</option>
+                    <option value="2">Ingreso de Febrero</option>
+                    <option value="3">Ingreso de Marzo</option>
+                    <option value="4">Ingreso de Abril</option>
+                    <option value="5">Ingreso de Mayo</option>
+                    <option value="6">Ingreso de Junio</option>
+                    <option value="7">Ingreso de Julio</option>
+                    <option value="8">Ingreso de Agosto</option>
+                    <option value="9">Ingreso de Septiembre</option>
+                    <option value="10">Ingreso de Octubre</option>
+                    <option value="11">Ingreso de Noviembre</option>
+                    <option value="12">Ingreso de Diciembre</option>
+                </select>
+                <div id="chartIngresos" style="width: 100%;"></div>
             </div>
             <div class="form-group">
-              <label for="email">Gráfica de pastel categorías Egresos:</label>
-              <div id="chartEgresos" style="width: 100%;"></div>
+                <label for="chartTypeEgresos">Gráfica de categorías Egresos:</label>
+                <select id="chartTypeEgresos" (change)="onChartTypeChange('egresos', $event)">
+                    <option value="total">Total Egresos</option>
+                    <option value="currentMonth">Egresos del Mes Actual</option>
+                    <option value="1">Egresos de Enero</option>
+                    <option value="2">Egresos de Febrero</option>
+                    <option value="3">Egresos de Marzo</option>
+                    <option value="4">Egresos de Abril</option>
+                    <option value="5">Egresos de Mayo</option>
+                    <option value="6">Egresos de Junio</option>
+                    <option value="7">Egresos de Julio</option>
+                    <option value="8">Egresos de Agosto</option>
+                    <option value="9">Egresos de Septiembre</option>
+                    <option value="10">Egresos de Octubre</option>
+                    <option value="11">Egresos de Noviembre</option>
+                    <option value="12">Egresos de Diciembre</option>
+                </select>
+                <div id="chartEgresos" style="width: 100%;"></div>
             </div>
-          </div>
+        </div>
+
+
+
+        <div class="form-row">
+        <div class="form-group">
+            <label >Gráfica  de  Ingresos por Año:</label>
+            <div style="display: flex; flex-direction: row;">
+                <div style="display: flex; flex-direction: row;">
+                    <label for="startYear">Año Inicial:</label>
+                    <input type="number" id="startY " [(ngModel)]="startDate" name="startYear" style="width: 30%; margin-left: 10px;">
+                </div>
+            <div style="display: flex; flex-direction: row; margin-left: 10px;">
+                <label for="endYear">Año Final:</label>
+                <input type="number" id="endYear" [(ngModel)]="endDate" name="endYear" style="width: 30%; margin-left: 10px;">
+            </div>
+            <button class="send-form" (click)="fetchChartDataByYear()" style="margin-left: 10px;">Generar Gráfica</button>
+        </div>
+            <div id="chartIngresosAño" style="width: 100%;"></div>
+        </div>
+
+
+        <div class="form-group">
+            
+            <label >Gráfica  de  Egresos por Año:</label>
+            <div style="display: flex; flex-direction: row; margin-left: 10px;">
+                <div style="display: flex; flex-direction: row; margin-left: 10px;">
+                    <label for="startDate2">Año Inicial:</label>
+                    <input type="number" id="startDate2" [(ngModel)]="startDate2" name="startDate2" style=" margin-left: 10px;">
+                </div>
+                <div style="display: flex; flex-direction: row; margin-left: 10px;"></div>
+                    <label for="endDate2">Año Final:</label>
+                    <input type="number" id="endDate2" [(ngModel)]="endDate2" name="endDate2" style="margin-left: 10px; width: 25%;">
+                    
+                <button class="send-form" (click)="fetchChartDataByYear2()" style="margin-left: 10px;">Generar Gráfica</button>
+                </div>
+                <div id="chartegresosAño" style="width: 100%;"></div>
+            </div>
 
         
+
+
     </div>
+
+    </div>
+
+
+
+
+
+ 
+
+
+          
+ 
+
+
+
+
+<!--
+        <div class="form-group">
+            <label for="Descargaar">Descargar documento</label>
+            <button class="btn"  [routerLink]="['/pdf']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                <i class="fa-solid fa-plus"></i>
+          Descargar PDF </button>
+        </div>-->
+  
     <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
 </body>
 </html>

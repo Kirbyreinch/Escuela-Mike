@@ -3,6 +3,12 @@ import { HttpClient,HttpParams } from '@angular/common/http';
 import { catchError } from 'rxjs/operators';
 import { Observable, BehaviorSubject } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { Subject } from 'rxjs';
+import {  HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { saveAs } from 'file-saver';
+import { map } from 'rxjs/operators';
+
+
 
 
 @Injectable({
@@ -16,16 +22,34 @@ export class AuthService {
   }
 
 
+
+  private logoSource = new Subject<string>();
+  private usernameSource = new Subject<string>();
+
+  logo$ = this.logoSource.asObservable();
+  username$ = this.usernameSource.asObservable();
+
+
+  updateLogo(logo: string) {
+    this.logoSource.next(logo);
+  }
+
+  updateUsername(username: string) {
+    this.usernameSource.next(username);
+  }
+
+
+
+
+
+
+
   login(username: string, password: string): Observable<any> {
     const params = new HttpParams()
       .set('user', username)
       .set('password', password);
-
     const url = `${this.apiurl}/login`;
-
-    // Console log para mostrar la URL y los parámetros
     console.log(`Sending request to URL: ${url}?${params.toString()}`);
-
     return this.http.post(url, null, { params });
   }
 
@@ -49,6 +73,12 @@ export class AuthService {
   }
   
 
+  getEscuelaByNombre(escuela: string): Observable<any> {
+    const url = `${this.apiurl}/escuela/consulta/{escuela}?school=${escuela}`;
+    console.log('URL de la API:', url); // Verifica la URL
+    return this.http.get<any>(url);
+  }
+
 
 
   getCategoriaingreso(): Observable<any[]> {
@@ -62,6 +92,9 @@ export class AuthService {
   }
 
 
+
+
+  //------ DASHBOARD
   dashboardingreso(): Observable<any> {
     const escuela = localStorage.getItem('escuela');
     if (!escuela) {
@@ -104,6 +137,135 @@ export class AuthService {
 
 
 
+
+
+
+  //MES ACTUAL
+  dashboaringresos_mes(): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/dashboard/get/incomes/current_month?school=${escuela}`;
+    return this.http.get<any>(url);
+  }
+
+
+
+  dashboaringresos_otros_mes(): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/dashboard/get/other_incomes/current_month?school=${escuela}`;
+    return this.http.get<any>(url);
+  }
+
+
+
+
+
+  dashboaregresos_mes(): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/dashboard/get/expenses/current_month?school=${escuela}`;
+    return this.http.get<any>(url);
+  }
+
+
+
+
+  //MES ESPECIFICO
+  dashboardingreso_pormes(mes: number): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/dashboard/get/incomes/entered_month?school=${escuela}&month=${mes}`;
+    return this.http.get<any>(url);
+  }
+  
+
+  dashboardingreso_otrospormes(mes: number): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/dashboard/get/other_incomes/entered_month?school=${escuela}&month=${mes}`;
+    return this.http.get<any>(url);
+  }
+
+
+
+  dashboardegreso_pormes(mes: number): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/dashboard/get/expenses/entered_month?school=${escuela}&month=${mes}`;
+    return this.http.get<any>(url);
+  }
+
+
+
+  //AÑO ESPECIFICO
+
+
+  Ingresos_Año(start: number, end:number): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/dashboard/get/incomes/year_range?school=${escuela}&start_year=${start}&end_year=${end}`;
+    return this.http.get<any>(url);
+  }
+
+
+  OtrosIngresos_Año(start: number, end:number): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/dashboard/get/other_incomes/year_range?school=${escuela}&start_year=${start}&end_year=${end}`;
+    return this.http.get<any>(url);
+  }
+
+
+  Egresos_Año(start: number, end:number): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/dashboard/get/expenses/year_range?school=${escuela}&start_year=${start}&end_year=${end}`;
+    return this.http.get<any>(url);
+  }
+
+
+
+
+  Ingresos_TodosAños(): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl} /dashboard/get/incomes/for_year?school=${escuela}`;
+    return this.http.get<any>(url);
+  }
+ 
+  Egresos_TodosAños(): Observable<any> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/dashboard/get/expenses/for_year?school=${escuela}`;
+    return this.http.get<any>(url);
+  }
+
+
+
+
   getingreso(): Observable<any> {
     const escuela = localStorage.getItem('escuela');
     if (!escuela) {
@@ -121,6 +283,25 @@ export class AuthService {
       throw new Error('No hay ninguna escuela en el localStorage');
     }
     const url = `${this.apiurl}/expenses/consultar/escuela/${escuela_nombre}`;
+    return this.http.get<any>(url);
+  }
+
+
+
+
+
+
+
+  
+  getexpensefiles(id_expenses: string): Observable<any> {
+    const url = `${this.apiurl}/expensesFile/consultar/${id_expenses}`;
+    return this.http.get<any>(url);
+  }
+
+
+
+  getarchivo(id_expense: string): Observable<any> {
+    const url = `${this.apiurl}/expensesFile/consultar/${id_expense}`;
     return this.http.get<any>(url);
   }
 
@@ -192,6 +373,38 @@ export class AuthService {
 
 
 
+  ArchivoEgreso(id_expense: string, file: string): Observable<any> {
+    const params = new HttpParams()
+      .set('id_expense', id_expense)
+      .set('file', file);
+    const url = `${this.apiurl}/expenses/saveFiles`;
+    console.log(`Sending request to URL: ${url}?${params.toString()}`);
+    return this.http.post(url, null, { params });
+  }
+
+
+
+
+  crearPDF(doc: any): Observable<any> {
+    const requestUrl = `${this.apiurl}/pdf/create/`;
+    console.log('Dirección de la solicitud:', requestUrl);
+    console.log('Datos enviados:', doc);
+
+    return this.http.post(requestUrl, doc, {
+      responseType: 'text', // Cambiamos el tipo de respuesta a 'text' ya que estamos esperando un texto
+      headers: new HttpHeaders().append('Content-Type', 'application/json') // Asegúrate de que el servidor acepte JSON
+    }).pipe(
+      map(response => this.handleFileDownloadResponse(response)) // Manejar la respuesta para descargar el archivo
+    );
+  }
+
+  private handleFileDownloadResponse(response: any): void {
+    const blob = new Blob([response], { type: 'application/pdf' }); // Crear un Blob con el texto recibido
+    saveAs(blob, 'nombre_archivo.pdf'); // Iniciar la descarga del archivo
+  }
+
+
+
   /////////Eliminar///////////////////////////////////////////////////////////////////////////////////////////////////
 ////eliminar usuarios
 eliminarUsuario(user_id: string): Observable<any> {
@@ -245,6 +458,36 @@ modificarUsuario(id: string, nuevoname: string, nuevolast_name: string, nuevoEma
 }
 
 
+modificaralumnado(escuela_nombre: string, nuevo_NoFamilia: string, nuevo_Cuota: string, nuevo_TTAlumnos: string, nuevo_TTGrupos: string, nuevo_Turno: string): Observable<any> {
+  const url = `${this.apiurl}/escuela/actualizar/alumnado`;
+  const body = {
+    escuela_nombre: escuela_nombre,
+    NoFamilia: nuevo_NoFamilia,
+    Cuota: nuevo_Cuota,
+    TTAlumnos: nuevo_TTAlumnos,
+    TTGrupos: nuevo_TTGrupos,
+    Turno: nuevo_Turno
+  };
+  return this.http.put(url, body);
+}
+
+
+
+modificarLocalizacion(escuela_nombre: string, nuevo_clave: string, nuevo_domicilio: string, nuevo_localidad: string, nuevo_zona: string, nuevo_sector: string, nuevo_telefono: string): Observable<any> {
+  const url = `${this.apiurl}/escuela/actualizar/localizacion`;
+  const body = {
+    escuela_nombre: escuela_nombre,
+    clave: nuevo_clave,
+    domicilio: nuevo_domicilio,
+    localidad: nuevo_localidad,
+    zona: nuevo_zona,
+    sector: nuevo_sector,
+    telefono: nuevo_telefono
+  };
+  return this.http.put(url, body);
+}
+
+
 
   modificarUsuariorol(username: string, nuevorol: string): Observable<any> {
     const url = `${this.apiurl}/users/update/user`;
@@ -275,6 +518,7 @@ modificarEscuela(school: string, nuevoname: string): Observable<any> {
 
 
 
+
 modificarCategoria(nombreActual: string, tipoActual: string, id: number, nuevoNombre: string, nuevoIdentificador: string): Observable<any> {
   const url = `${this.apiurl}/categoria/actualizar?categoria_nombre=${nombreActual}&categoria_tipo=${tipoActual}`;
   const body = {
@@ -288,6 +532,16 @@ modificarCategoria(nombreActual: string, tipoActual: string, id: number, nuevoNo
   console.log('Cuerpo de la solicitud:', body);
 
   return this.http.put(url, body);
+}
+
+
+
+
+
+validarArchivo(id: string, user_register: string): Observable<any> {
+  const url = `${this.apiurl}/expenses/validated?id_expense_file=${id}&user_register=${user_register}`;
+  console.log('URL para validar:', url); 
+  return this.http.put<any>(url, {});
 }
 
 

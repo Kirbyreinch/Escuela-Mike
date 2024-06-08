@@ -32,48 +32,49 @@
             </div>
         </div>
 
-
         <form (ngSubmit)="onSubmit()" class="container" style="padding: 30px;">
             <div class="form-row" style="border-bottom: 2px solid lightgray; margin-top: 10px;">
               <div style="width: 90%;">
                 <h4>Informacion Basica</h4>
               </div>
-        </div>
-        <div class="form-row">
-
-
-            <div class="form-group">
-                <label for="nombre">Nombre de la escuela:</label>
-                <input type="text" id="nombre" name="nombre" [(ngModel)]="egresos.escuela_nombre" required>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Nombre">Numero de la categoria:</label>
+                    <input type="text" id="Nombre" name="Nombre" [(ngModel)]="egresos.category" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="Cantidad">Cantidad:</label>
+                    <input type="text" id="Cantidad" name="Cantidad" [(ngModel)]="egresos.monto" required>
+                </div>
             </div>
 
-            <div class="form-group">
-                <label for="Nombre">Nombre de la categoria:</label>
-                <input type="text" id="Nombre" name="Nombre" [(ngModel)]="egresos.category" required>
-            </div>
+
+
+
+
+            <div class="form-row">
+
+
+                <div class="form-group">
+                    <label for="id">ID:</label>
+                    <input type="text" id="id" name="id" [(ngModel)]="Files.id_expense" required>
+                </div>
     
-        </div>
-        <div class="form-row">
-
-            <div class="form-group">
-                <label for="Cantidad">Cantidad:</label>
-                <input type="text" id="Cantidad" name="Cantidad" [(ngModel)]="egresos.monto" required>
+                <div class="form-group">
+                    <label for="file">Archivo:</label>
+                    <input type="text" id="file" name="file" [(ngModel)]="Files.file" required>
+                </div>
+        
             </div>
-        </div>
 
-
-        <div class="form-row">
-            <div class="form-group">
-                <label for="Usuario">Usuario:</label>
-                <input type="text" id="Usuario" name="Usuario" [(ngModel)]="egresos.user_register" required>
-            </div>
-        </div>
-
-        <button type="submit" class="send-form">Añadir</button>
-        <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
-    </form>
+            
+            <button type="submit" class="send-form">Añadir</button>
+            <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+        </form>
     </div>
-    
     <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
 </body>
 </html>

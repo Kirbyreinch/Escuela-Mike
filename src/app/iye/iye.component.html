@@ -10,7 +10,7 @@
     <div class="container" >
         <div class="form-row" style="margin-top: 80px ;">
             <div class="form-header">
-                <h2>Ingresos y Egresos</h2>
+                <h2>Egresos </h2>
             </div>
         </div>
         <div class="form-row" style="border-bottom: 2px solid lightgray ; margin-top: 10px;">
@@ -18,70 +18,16 @@
   
             </div>
         </div>
-        <div class="form-row">
-            <div class="form-group">
-                <div >
-                    <label for="name-label">Ingresos</label>
-                </div>
-
-
-                              
-                <div class="search-container">
-                    <input type="text" class="search-input" placeholder="Buscar..." [(ngModel)]="filtroIngresos" (keyup)="aplicarFiltroIngresos()">
-                    <div class="combo-box-container">
-                        <select class="combo-box" [(ngModel)]="filtroSeleccionadoIngresos" (change)="aplicarFiltroIngresos()">
-                            <option value="id">ID</option>
-                            <option value="categoria">Categoria</option>
-                            <option value="usuario">Usuario</option>
-                        </select>
-                    </div>
-                </div>
-
-                <table>
-                    <th>ID</th>
-                    <th>Escuela</th>
-                    <th>Categoria</th>
-                    <th>Fecha</th>
-                    <th>Cantidad</th>
-                    <th>Usuario registrado</th>
-
-                    <th>
-                        <button class="btn"  [routerLink]="['/crear-ingreso']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
-                            <i class="fa-solid fa-plus"></i>
-                        Registrar </button>
-                    </th>
-
-                    <tbody>
-                        <tr *ngFor="let ingreso of ingresos">
-                       <td>{{ ingreso.id }}</td>
-                       <td>{{ ingreso.escuela }}</td>
-                       <td>{{ ingreso.categoria }}</td>
-                       <td>{{ ingreso.date }}</td>
-                       <td>{{ ingreso.amount }}</td>
-                       <td>{{ ingreso.user_register }}</td>
-                           <td>
-                           <button mat-icon-button (click)="openModificarCategoria(ingreso)" class="btn" style="background-color: rgb(223, 223, 26); border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
-                            <mat-icon>settings</mat-icon>
-                        </button>
-                           </td>
-                       </tr>
-                   </tbody>
-                   
-                </table>
-            </div>
+       
    
             <div class="form-group">
-                <div >
-                    <label for="name-label">Egresos</label>
-                </div>
-
-                                         
+                                       
                 <div class="search-container">
                     <input type="text" class="search-input" placeholder="Buscar..." [(ngModel)]="filtroEgresos" (keyup)="aplicarFiltroEgresos()">
                     <div class="combo-box-container">
                         <select class="combo-box" [(ngModel)]="filtroSeleccionadoEgresos" (change)="aplicarFiltroEgresos()">
                             <option value="id">ID</option>
-                            <option value="nombre">Nombre</option>
+                            <option value="nombre">Escuela</option>
                             <option value="category">Categoria</option>
 
                         </select>
@@ -100,16 +46,19 @@
                 
                 <table>
                     <th>ID</th>
-                    <th>Nombre</th>
+                    <th>Escuela</th>
                     <th>Categoria</th>
                     <th>Fecha</th>
                     <th>Monto</th>
                     <th>Usuario Registrado</th>
+                    <th>Archivo Asociado</th>
+                    <th>Verificado</th>
+                    <th>Estado</th>
 
                     <th>
                         <button class="btn"  [routerLink]="['/crear-egreso']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
                             <i class="fa-solid fa-plus"></i>
-                        Registrar </button>
+                        Registrar Egreso</button>
                     </th>
 
                     <tbody>
@@ -121,19 +70,29 @@
                        <td>{{ egreso.monto }}</td>
                        <td>{{ egreso.user_register }}</td>
 
-                           <td>
-                           <button mat-icon-button (click)="openModificarCategoria(egreso)" class="btn" style="background-color: rgb(223, 223, 26); border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
-                            <mat-icon>settings</mat-icon>
-                        </button>
-                        
-                           </td>
+                  <td>{{ egreso.archivoLink }}</td>
+                  <td>{{ egreso.rol }}</td>
+                  <td>{{ egreso.estado }}</td>
+    
+                       <td>
+                        <div style="display: flex; flex-direction: row;">
+                            <button mat-button (click)="validarEgreso(egreso.id)" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                                <mat-icon>check_circle</mat-icon>
+                            </button>
+
+                            <button mat-button (click)="openArchivos(egreso.archivoLink)" style="background-color: #5b6ce9; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                                <mat-icon>link</mat-icon>
+                              </button>
+                          
+                        </div>
+                      </td>
+
                        </tr>
                    </tbody>
                    
                 </table>
             </div>
         </div>
-    </div>
     <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
 </body>
 </html>

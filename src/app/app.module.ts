@@ -40,6 +40,12 @@ import { CrearIngresoComponent } from './crear-ingreso/crear-ingreso.component';
 import { CrearEgresoComponent } from './crear-egreso/crear-egreso.component';
 
 import { NgApexchartsModule } from 'ng-apexcharts';
+import { ModificarEscuelaAlumnadoComponent } from './modificar-escuela-alumnado/modificar-escuela-alumnado.component';
+import { ModificarEscuelaLocalizacionComponent } from './modificar-escuela-localizacion/modificar-escuela-localizacion.component';
+import { CrearEgresoarchivoComponent } from './crear-egresoarchivo/crear-egresoarchivo.component';
+import { IngresolosComponent } from './ingresolos/ingresolos.component';
+import { DocumentoComponent } from './documento/documento.component';
+import { PruebasComponent } from './pruebas/pruebas.component';
 
 
 @NgModule({
@@ -65,7 +71,13 @@ import { NgApexchartsModule } from 'ng-apexcharts';
     EliminarCategoriaegrComponent,
     IyeComponent,
     CrearIngresoComponent,
-    CrearEgresoComponent
+    CrearEgresoComponent,
+    ModificarEscuelaAlumnadoComponent,
+    ModificarEscuelaLocalizacionComponent,
+    CrearEgresoarchivoComponent,
+    IngresolosComponent,
+    DocumentoComponent,
+    PruebasComponent
   ],
   imports: [
     BrowserModule,

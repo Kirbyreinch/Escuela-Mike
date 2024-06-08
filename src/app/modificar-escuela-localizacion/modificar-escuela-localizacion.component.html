@@ -1,0 +1,42 @@
+<div class="dialog-container">
+    <h2 class="dialog-title">Actualizar Localizacion</h2>
+  
+
+    <div class="dialog-text">
+      <label for="clave" class="input-label">Clave:</label>
+      <input type="text" id="clave" [(ngModel)]="nuevo_clave" class="password-input" placeholder=" ">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="domicilio" class="input-label">Domicilio:</label>
+      <input type="text" id="domicilio" [(ngModel)]="nuevo_domicilio" class="password-input" placeholder=" ">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="localidad" class="input-label">Localidad:</label>
+      <input type="text" id="localidad" [(ngModel)]="nuevo_localidad" class="password-input" placeholder=" ">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="zona" class="input-label">Zona:</label>
+      <input type="text" id="zona" [(ngModel)]="nuevo_zona" class="password-input" placeholder=" ">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="sector" class="input-label">Sector:</label>
+      <input type="text" id="sector" [(ngModel)]="nuevo_sector" class="password-input" placeholder="Escuela del usuario">
+    </div>
+
+    <div class="dialog-text">
+        <label for="telefono" class="input-label">Telefono:</label>
+        <input type="text" id="telefono" [(ngModel)]="nuevo_telefono" class="password-input" placeholder="Escuela del usuario">
+      </div>
+  
+
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+    
+    <div class="button-container">
+      <button class="cancel-button" (click)="cancelar()">Cancelar</button>
+      <button class="confirm-button" (click)="confirmar()">Guardar Cambios</button>
+    </div>
+  </div>

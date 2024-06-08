@@ -3,6 +3,8 @@ import { AuthService } from '../auth.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ModificarEscuelaComponent } from '../modificar-escuela/modificar-escuela.component';
 import { EliminarEscuelasComponent } from '../eliminar-escuelas/eliminar-escuelas.component';
+import { ModificarEscuelaAlumnadoComponent } from '../modificar-escuela-alumnado/modificar-escuela-alumnado.component';
+import { ModificarEscuelaLocalizacionComponent } from '../modificar-escuela-localizacion/modificar-escuela-localizacion.component';
 
 @Component({
   selector: 'app-escuelas',
@@ -84,4 +86,59 @@ export class EscuelasComponent implements OnInit {
       }
     });
   }
+
+
+
+
+  Openmodificaralumnado(escuela: any): void {
+    console.log('escuela seleccionada:', escuela.nombre);
+    const dialogRef = this.dialog.open(ModificarEscuelaAlumnadoComponent, {
+      width: '400px',
+      data: {
+        escuela: {
+          nombre: escuela.nombre,
+          no_familia: escuela.no_familia,
+          cuota: escuela.cuota,
+          tt_alumnos: escuela.tt_alumnos,
+          tt_grupos: escuela.tt_grupos,
+          turno: escuela.turno,
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadEscuelas();
+      }
+    });
+  }
+
+
+
+
+  Openmodificarlocalizacion(escuela: any): void {
+    console.log('escuela seleccionada:', escuela.nombre);
+    const dialogRef = this.dialog.open(ModificarEscuelaLocalizacionComponent, {
+      width: '400px',
+      data: {
+        escuela: {
+          nombre: escuela.nombre,
+          clave: escuela.clave,
+          domicilio: escuela.domicilio,
+          localidad: escuela.localidad,
+          zona: escuela.zona,
+          sector: escuela.sector,
+          telefono: escuela.telefono,
+        }
+      }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.loadEscuelas();
+      }
+    });
+  }
+
+
 }

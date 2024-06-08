@@ -12,6 +12,9 @@ import { EscuelasComponent } from './escuelas/escuelas.component';
 import { IyeComponent } from './iye/iye.component';
 import { CrearEgresoComponent } from './crear-egreso/crear-egreso.component';
 import { CrearIngresoComponent } from './crear-ingreso/crear-ingreso.component';
+import { CrearEgresoarchivoComponent } from './crear-egresoarchivo/crear-egresoarchivo.component';
+import { IngresolosComponent } from './ingresolos/ingresolos.component';
+import { DocumentoComponent } from './documento/documento.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -22,6 +25,9 @@ const routes: Routes = [
   { path: 'categorias', component: CategoriasComponent},
   { path: 'escuelas', component: EscuelasComponent},
   { path: 'iye', component: IyeComponent},
+  { path: 'iysine', component: IngresolosComponent},
+  { path: 'pdf', component: DocumentoComponent},
+
 
   { path: 'crear-usuarios', component: CrearUsuariosComponent},
   { path: 'crear-escuela', component: CrearEscuelaComponent},
@@ -29,6 +35,9 @@ const routes: Routes = [
   { path: 'crear-categoriaing', component: CrearCategoriaingComponent},
   { path: 'crear-egreso', component: CrearEgresoComponent},
   { path: 'crear-ingreso', component: CrearIngresoComponent},
+  { path: 'crear-egr_archivo/:id', component: CrearEgresoarchivoComponent},
+
+  
 
 
   

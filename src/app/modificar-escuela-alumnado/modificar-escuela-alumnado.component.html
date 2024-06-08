@@ -1,0 +1,43 @@
+<div class="dialog-container">
+    <h2 class="dialog-title">Actualizar Alumnado</h2>
+  
+
+ 
+
+    <div class="dialog-text">
+      <label for="Familia" class="input-label">Clave:</label>
+      <input type="text" id="Familia" [(ngModel)]="nuevo_NoFamilia" class="password-input" placeholder=" ">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="Cuota" class="input-label">Cuota:</label>
+      <input type="text" id="Cuota" [(ngModel)]="nuevo_Cuota" class="password-input" placeholder=" ">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="Alumnos" class="input-label">Total Alumnos:</label>
+      <input type="text" id="Alumnos" [(ngModel)]="nuevo_TTAlumnos" class="password-input" placeholder=" ">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="Grupos" class="input-label">Total Grupos:</label>
+      <input type="text" id="Grupos" [(ngModel)]="nuevo_TTGrupos" class="password-input" placeholder=" ">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="turno" class="input-label">Turno:</label>
+      <select id="turno" [(ngModel)]="nuevo_Turno" class="password-input">
+        <option value="Matutino">Matutino</option>
+        <option value="Vespertino">Vespertino</option>
+        <option value="Nocturno">Nocturno</option>
+      </select>
+    </div>
+  
+
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+    
+    <div class="button-container">
+      <button class="cancel-button" (click)="cancelar()">Cancelar</button>
+      <button class="confirm-button" (click)="confirmar()">Guardar Cambios</button>
+    </div>
+  </div>

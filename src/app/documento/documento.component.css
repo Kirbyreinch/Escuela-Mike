@@ -1,10 +1,10 @@
-body{
+body {
     background-color: white;
     margin: 0;
     color: #252475;
 }
-.container{
-    width: 90%;
+.container {
+    width: 70%;
     height: fit-content;
     min-height: 350px;
     display: flex;
@@ -15,60 +15,57 @@ body{
     align-items: center;
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
 }
-h2{
+h2 {
     font-size: 32px;
     margin: 0;
     text-align: center;
-
 }
-h3{
+h3 {
     font-size: 25px;
     margin: 0;
     text-align: center;
-
 }
-h4{
-    border-bottom: 2px solid #5551ff; 
+h4 {
+    border-bottom: 2px solid #5551ff;
     font-size: 20px;
-    margin: 0; 
-    max-width: 30%; 
+    margin: 0;
+    max-width: 30%;
     text-align: center;
 }
-.form-header{
+.form-header {
     display: flex;
     flex-direction: column;
     padding: 5px;
 }
-.logo{
-    margin-right: 20px; 
-    width:10%;
+.logo {
+    margin-right: 20px;
+    width: 10%;
 }
-.icon-span{
+.icon-span {
     padding: 5px;
     margin-right: 5px;
 }
-.form-row{
+.form-row {
     width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: center;
 }
-.form-group{
-    width: 90%;
+.form-group {
+    width: 80%;
     align-items: center;
     display: flex;
     flex-direction: column;
     margin: 10px;
     padding: 10px;
 }
-label{
+label {
     font-size: 20px;
     font-weight: 500;
     margin-bottom: 10px;
-
 }
-input, textarea, select{
+input, textarea, select {
     border: 2px solid #000;
     border-radius: 5px;
     height: 50px;
@@ -80,9 +77,9 @@ input, textarea, select{
     user-select: auto;
     font-size: 16px;
     padding: 0 6px;
-    padding-left: 12px;   
+    padding-left: 12px;
 }
-table{
+table {
     margin-top: 15px;
     border: 2px solid #000;
     border-radius: 5px;
@@ -96,16 +93,15 @@ table{
     border-collapse: collapse;
     overflow-x: auto;
 }
-tr{
+tr {
     width: 100%;
     max-width: 100%;
-    
 }
 td:nth-child() {
     border-bottom: 3px darkgrey solid;
 }
-th,td {
-    width:max-content;
+th, td {
+    width: max-content;
     text-align: left;
     padding: 15px;
     box-sizing: border-box;
@@ -123,14 +119,13 @@ td {
     border-right: 0;
     word-wrap: break-word;
 }
-
-textarea{
+textarea {
     padding: 5px;
 }
-input:focus, textarea:focus, select:focus{
+input:focus, textarea:focus, select:focus {
     border: 4px solid #5551ff;
 }
-.send-form{
+.send-form {
     display: inline-block;
     outline: 0;
     cursor: pointer;
@@ -144,70 +139,54 @@ input:focus, textarea:focus, select:focus{
     font-weight: 400;
     font-size: 16px;
     box-shadow: 0 4px 14px 0 rgb(0 118 255 / 39%);
-    transition: background 0.2s ease,color 0.2s ease,box-shadow 0.2s ease;
+    transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
     margin-bottom: 10px;
 }
-.send-form:hover{
-    background: rgba(0,118,255,0.9);
+.send-form:hover {
+    background: rgba(0, 118, 255, 0.9);
     box-shadow: 0 6px 20px rgb(0 118 255 / 23%);
 }
-
-@media screen and (max-width: 768px){
-    body{
-        background-color: white;
-        margin: 0;
-    }
-    .container{
-        width: 100vw;
-        height: fit-content;
-        min-height: 400px;
-        display: flex;
-        flex-direction: column;
-        margin: 20 auto;
-        border-radius: 0;
-        justify-content: center;
-        align-items: center;
-        box-shadow: none;
-    }
-    .form-row{
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-    }
-    .form-group{
-        width: 80%;
-        align-items: center;
-        display: flex;
-        flex-direction: column;
-        margin: 10px;
-        padding: 10px;
-    }
-    label{
-        font-size: 20px;
-        font-weight: 500;
-        margin-bottom: 10px;
-    
-    }
-    input, textarea, select{
-        border: 2px solid #000;
-        border-radius: 5px;
-        height: 50px;
-        line-height: normal;
-        color: #282828;
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-        user-select: auto;
-        font-size: 16px;
-        padding: 0 6px;
-        padding-left: 12px;   
-    }
-    h4{
-        max-width: fit-content;
-    }
-    .logo{
-        width: 35%;
-    }
+.action-buttons {
+    display: flex;
+    gap: 10px; /* Espacio entre los botones */
 }
+.btn-modify {
+    background-color: yellow;
+    border-radius: 25px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.btn-delete {
+    background-color: #f44336;
+    border-radius: 25px;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+.search-container {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre la barra de búsqueda y el combobox */
+    width: 100%;
+}
+.search-input {
+    flex: 1;
+    max-width: 300px; /* Ajusta el tamaño de la barra de búsqueda */
+}
+.combo-box-container {
+    flex-shrink: 0;
+}
+@media screen and (max-width: 768px) {}

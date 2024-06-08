@@ -8,11 +8,11 @@ import { ModificarCategoriaComponent } from '../modificar-categoria/modificar-ca
 
 
 @Component({
-  selector: 'app-iye',
-  templateUrl: './iye.component.html',
-  styleUrl: './iye.component.css'
+  selector: 'app-ingresolos',
+  templateUrl: './ingresolos.component.html',
+  styleUrl: './ingresolos.component.css' 
 })
-export class IyeComponent implements OnInit {
+export class IngresolosComponent {
   egresos: any[] = [];
   egresosOriginal: any[] = [];
 
@@ -31,14 +31,14 @@ export class IyeComponent implements OnInit {
 
 
   archivoLink: string = '';
-  userRole: string = '';
+
   
 
   constructor(private authService: AuthService, private dialog: MatDialog) {}
 
   ngOnInit(): void {
+    this.loadingresos();
     this.loadegresos();
-    this.userRole = localStorage.getItem('rol') || '';
   }
 
   loadingresos() {
@@ -53,42 +53,27 @@ export class IyeComponent implements OnInit {
     );
   }
 
-  loadegresos() {
-    this.authService.getegreso().subscribe(
-      (egresos) => {
-        this.egresos = egresos;
-        this.egresos.forEach(egreso => {
-          this.authService.getarchivo(egreso.id).subscribe(
-            (archivo) => {
-              egreso.archivoLink = archivo.archivo;
-              egreso.estado = archivo.validado;
-  
-              // Determinar el campo de rol en función del rol del usuario
-              if (this.userRole === "tesorero") {
-                egreso.rol = archivo.tesorero;
-              } else if (this.userRole === "presidente") {
-                egreso.rol = archivo.presidente;
-              } else if (this.userRole === "director") {
-                egreso.rol = archivo.director;
-              } else if (this.userRole === "validado") {
-                egreso.rol = archivo.director;
-              } else {
-                console.error("Rol de usuario no reconocido");
-                return;
-              }
-            },
-            (error) => {
-              console.error('Error al obtener el archivo', error);
-            }
-          );
-        });
-        this.egresosOriginal = [...egresos];
-      },
-      (error) => {
-        console.error('Error al obtener la lista de egresos', error);
-      }
-    );
-  }
+ loadegresos() {
+  this.authService.getegreso().subscribe(
+    (egresos) => {
+      this.egresos = egresos;
+      this.egresos.forEach(egreso => {
+        this.authService.getarchivo(egreso.id).subscribe(
+          (archivo) => {
+            egreso.archivoLink = archivo.archivo;
+          },
+          (error) => {
+            console.error('Error al obtener el archivo', error);
+          }
+        );
+      });
+      this.egresosOriginal = [...egresos];
+    },
+    (error) => {
+      console.error('Error al obtener la lista de egresos', error);
+    }
+  );
+}
 
   aplicarFiltroIngresos() {
     const filtroMinusculas = this.filtroIngresos.toLowerCase();
@@ -179,66 +164,21 @@ export class IyeComponent implements OnInit {
 
 
 
-  openArchivos(archivoLink: string) {
-    // Abrir el enlace en una nueva pestaña del navegador
-    window.open(archivoLink, '_blank');
-  }
 
   openArchivo(id_expense: string) {
     this.authService.getexpensefiles(id_expense).subscribe(
-      (response) => {
-        console.log('Respuesta de getexpensefiles:', response);
-        let userRoleField: string;
-  
-        // Determinar el campo correspondiente al rol del usuario
-        if (this.userRole === 'presidente') {
-          userRoleField = 'presidente_usuario';
-        } else if (this.userRole === 'tesorero') {
-          userRoleField = 'tesorero_usuario';
-        } else if (this.userRole === 'director') {
-          userRoleField = 'director_usuario';
-        } else {
-          console.error('Rol de usuario no reconocido');
-          return;
+        (response) => {
+            console.log('Respuesta de getexpensefiles:', response);
+            if (response && response.archivo) {
+                window.open(response.archivo, '_blank');
+            } else {
+                console.error('No se encontró el enlace del archivo en la respuesta');
+            }
+        },
+        (error) => {
+            console.error('Error al obtener el archivo:', error);
         }
-  
-        // Mostrar el campo correspondiente al rol del usuario
-        if (response && response[userRoleField]) {
-          console.log('Usuario encontrado:', response[userRoleField]);
-          console.log('Respuesta de getexpensefiles:', response);
-          // Aquí puedes hacer lo que necesites con el valor del campo
-        } else {
-          console.error('No se encontró el campo correspondiente al usuario');
-          console.log('Respuesta de getexpensefiles:', response);
-        }
-      },
-      (error) => {
-        console.error('Error al obtener el archivo:', error);
-      }
     );
-  }
-
-
-
-
-
-
-
-
-  validarEgreso(id: string) {
-    const user_register = localStorage.getItem('username') || ''; // Obtener el nombre de usuario del localStorage
-    this.authService.validarArchivo(id, user_register ).subscribe(
-      (response) => {
-        // Aquí puedes manejar la respuesta de la validación si es necesario
-        console.log('Archivo validado correctamente:', response);
-        this.loadegresos();
-      },
-      (error) => {
-        console.error('Error al validar el archivo:', error);
-      }
-    );
-  }
-
-
+}
 
 }

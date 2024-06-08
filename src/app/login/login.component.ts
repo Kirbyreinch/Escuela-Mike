@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -6,9 +6,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   loginError: boolean = false;
 
@@ -21,6 +21,9 @@ export class LoginComponent {
       username: ['', Validators.required],
       password: ['', Validators.required]
     });
+  }
+
+  ngOnInit(): void {
     // Reiniciar localStorage al iniciar el componente
     localStorage.clear();
   }
@@ -43,12 +46,17 @@ export class LoginComponent {
               localStorage.setItem('rol', userData.rol);
               localStorage.setItem('escuela', userData.escuela);
 
-              // Console logs to check if values are stored correctly
-              console.log('Username stored:', localStorage.getItem('username'));
-              console.log('Password stored:', localStorage.getItem('password'));
-              console.log('ID stored:', localStorage.getItem('id'));
-              console.log('Rol stored:', localStorage.getItem('rol'));
-              console.log('Escuela stored:', localStorage.getItem('escuela'));
+              // Update the AuthService with the new data
+              this.authService.updateUsername(username);
+
+              this.authService.getEscuelaByNombre(userData.escuela).subscribe(
+                (response) => {
+                  this.authService.updateLogo(response.logo);
+                },
+                (error) => {
+                  console.error('Error al obtener los datos de la escuela', error);
+                }
+              );
 
               // Navega a la ruta de inicio en caso de éxito
               this.router.navigate(['/inicio']);

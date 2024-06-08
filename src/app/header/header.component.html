@@ -1,27 +1,28 @@
 <header>
-    <div class="left-section">
-      <!-- Aquí se muestra el logo siempre -->
-       <!--<a>Logo</a><img src="ruta_del_logo.png" alt="Logo">-->
+  <div class="left-section">
+    <!-- Aquí se muestra el logo siempre -->
+    <div class="logo-container" *ngIf="escuelaLogo">
+      <img [src]="escuelaLogo" alt="Logo de la escuela"/>
     </div>
-  
-    <div class="middle-section" *ngIf="shouldShowMiddleSection()">
-      <nav>
-        <ul>
-          <li><a routerLink="/inicio">Inicio</a></li>
-          <li><a routerLink="/user">Usuarios</a></li>
-          <li><a routerLink="/escuelas">Escuelas</a></li>
-          <li><a routerLink="/categorias">Categorias</a></li>
-          <li><a routerLink="/iye">Ingresos y Egresos</a></li>
-          
+  </div>
 
-        </ul>
-      </nav>
-    </div>
-  
-    <div class="right-section" *ngIf="shouldShowRightSection()">
-      <span>Usuario: Maestro ejemplo</span>
-      <button (click)="logout()">Cerrar Sesión</button>
-    </div>
-  </header>
-  
-  
+  <div class="middle-section" *ngIf="shouldShowMiddleSection()">
+    <nav>
+      <ul>
+        <li><a routerLink="/inicio">Inicio</a></li>
+        <li><a routerLink="/user">Usuarios</a></li>
+        <li><a routerLink="/escuelas">Escuelas</a></li>
+        <li><a routerLink="/categorias">Categorias</a></li>
+        <li><a routerLink="/iye">Egresos</a></li>
+        <li><a routerLink="/iysine">Ingresos</a></li>
+      </ul>
+    </nav>
+  </div>
+
+  <div class="right-section" *ngIf="shouldShowRightSection()">
+    <span>Usuario: {{ username }}</span>
+    <button class="" (click)="logout()">Cerrar Sesión</button>
+  </div>
+
+
+</header>

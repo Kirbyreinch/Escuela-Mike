@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./ingresolos.component.css">
+    <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container" >
+        <div class="form-row" style="margin-top: 80px ;">
+            <div class="form-header">
+                <h2>Ingresos </h2>
+            </div>
+        </div>
+        <div class="form-row" style="border-bottom: 2px solid lightgray ; margin-top: 10px;">
+            <div style="width: 90%;">
+  
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group">
+        
+                              
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Buscar..." [(ngModel)]="filtroIngresos" (keyup)="aplicarFiltroIngresos()">
+                    <div class="combo-box-container">
+                        <select class="combo-box" [(ngModel)]="filtroSeleccionadoIngresos" (change)="aplicarFiltroIngresos()">
+                            <option value="id">ID</option>
+                            <option value="nomrbe">Escuela</option>
+                            <option value="categoria">Categoria</option>
+                        </select>
+                    </div>
+                </div>
+
+                <table>
+                    <th>ID</th>
+                    <th>Escuela</th>
+                    <th>Categoria</th>
+                    <th>Fecha</th>
+                    <th>Cantidad</th>
+                    <th>Usuario registrado</th>
+
+                    <th>
+                        <button class="btn"  [routerLink]="['/crear-ingreso']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                            <i class="fa-solid fa-plus"></i>
+                        Registrar Ingreso </button>
+
+
+               
+
+                    </th>
+
+                    <tbody>
+                        <tr *ngFor="let ingreso of ingresos">
+                       <td>{{ ingreso.id }}</td>
+                       <td>{{ ingreso.escuela }}</td>
+                       <td>{{ ingreso.categoria }}</td>
+                       <td>{{ ingreso.date }}</td>
+                       <td>{{ ingreso.amount }}</td>
+                       <td>{{ ingreso.user_register }}</td>
+        
+                       </tr>
+                   </tbody>
+                   
+                </table>
+            </div>
+   
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
+</body>
+</html>

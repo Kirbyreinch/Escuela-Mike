@@ -4,7 +4,7 @@ header {
     align-items: center;
     background-color: #d8a03f;
     color: #000000;
-    padding: 20px 0;
+    padding: 5px 0;
     width: 100%;
     position: fixed;
     top: 0;
@@ -30,3 +30,36 @@ nav ul li {
 .right-section {
   text-align: right;
 }
+
+
+.logo-container {
+  width: 100px; /* Define el tamaño fijo que desees */
+  height: 80px; /* Define el tamaño fijo que desees */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.logo-container img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+
+.right-section button {
+    font-size: 20px; /* Ajusta el tamaño según tus preferencias */
+}
+
+.middle-section{
+  font-size: 20px;
+}
+
+.right-section{
+  font-size: 20px;
+}
+
+
+
