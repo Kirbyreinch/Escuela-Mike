@@ -33,7 +33,7 @@
                     </div>
                 </div>
 
-                <table>
+                <table style="width: fit-content;">
                     <th>ID</th>
                     <th>Escuela</th>
                     <th>Categoria</th>
@@ -44,11 +44,7 @@
                     <th>
                         <button class="btn"  [routerLink]="['/crear-ingreso']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
                             <i class="fa-solid fa-plus"></i>
-                        Registrar Ingreso </button>
-
-
-               
-
+                        Registrar</button>
                     </th>
 
                     <tbody>
@@ -59,7 +55,6 @@
                        <td>{{ ingreso.date }}</td>
                        <td>{{ ingreso.amount }}</td>
                        <td>{{ ingreso.user_register }}</td>
-        
                        </tr>
                    </tbody>
                    

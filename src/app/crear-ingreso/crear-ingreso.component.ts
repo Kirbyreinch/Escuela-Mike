@@ -18,12 +18,15 @@ export class CrearIngresoComponent implements OnInit {
   };
 
   errorMessage: string = '';
+  
+  cbingresos: any = [];
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit() {
     this.ingresos.school_name = localStorage.getItem('escuela') || '';
     this.ingresos.user_register = localStorage.getItem('username') || '';
+    this.loadincomecombobox();
   }
 
   checkCategory() {
@@ -41,6 +44,23 @@ export class CrearIngresoComponent implements OnInit {
       (error) => {
         console.error('Error al crear ingreso:', error);
         this.errorMessage = 'Datos incorrectos o repetidos';
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 2000);
+      }
+    );
+  }
+
+  loadincomecombobox() {
+    this.authService.getCategoriaingreso().subscribe(
+      (response) => {
+        console.log('egresos:', response);
+        this.cbingresos = response;
+        console.log('cbingresos:', this.cbingresos);
+      },
+      (error) => {
+        console.error('Error al cargar egresos:', error);
+        this.errorMessage = 'Error al cargar egresos';
         setTimeout(() => {
           this.errorMessage = '';
         }, 2000);

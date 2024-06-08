@@ -8,13 +8,15 @@ body {
     height: fit-content;
     min-height: 350px;
     display: flex;
+    border-radius: 0px;
     flex-direction: column;
     margin: 20px auto;
-    border-radius: 40px;
     justify-content: center;
     align-items: center;
     box-shadow: rgba(17, 12, 46, 0.15) 0px 48px 100px 0px;
+    overflow-x: auto;
 }
+
 h2 {
     font-size: 32px;
     margin: 0;

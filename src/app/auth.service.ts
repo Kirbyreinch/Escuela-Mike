@@ -79,7 +79,10 @@ export class AuthService {
     return this.http.get<any>(url);
   }
 
-
+  getexpenses(): Observable<any[]> {
+    const url = `${this.apiurl}/categoria/consulta/all/egresos`; 
+    return this.http.get<any[]>(url);
+  }
 
   getCategoriaingreso(): Observable<any[]> {
     const url = `${this.apiurl}/categoria/consulta/ingresos`; 
