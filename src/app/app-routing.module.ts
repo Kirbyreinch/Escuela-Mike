@@ -15,11 +15,16 @@ import { CrearIngresoComponent } from './crear-ingreso/crear-ingreso.component';
 import { CrearEgresoarchivoComponent } from './crear-egresoarchivo/crear-egresoarchivo.component';
 import { IngresolosComponent } from './ingresolos/ingresolos.component';
 import { DocumentoComponent } from './documento/documento.component';
+import { InicioSupervisorComponent } from './inicio-supervisor/inicio-supervisor.component';
+import { EscuelasSupervisorComponent } from './escuelas-supervisor/escuelas-supervisor.component';
+import { CrearUsuariosSupervisorComponent } from './crear-usuarios-supervisor/crear-usuarios-supervisor.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'login', component: LoginComponent },
+  { path: 'supervisor', component: InicioSupervisorComponent},
   { path: 'inicio', component: InicioComponent},
+
 
   { path: 'user', component: UserComponent},
   { path: 'categorias', component: CategoriasComponent},
@@ -29,6 +34,12 @@ const routes: Routes = [
   { path: 'pdf', component: DocumentoComponent},
 
 
+
+
+  { path: 'supervisor_escuelas', component: EscuelasSupervisorComponent},
+
+
+
   { path: 'crear-usuarios', component: CrearUsuariosComponent},
   { path: 'crear-escuela', component: CrearEscuelaComponent},
   { path: 'crear-categoria', component: CrearCategoriaComponent},
@@ -36,10 +47,10 @@ const routes: Routes = [
   { path: 'crear-egreso', component: CrearEgresoComponent},
   { path: 'crear-ingreso', component: CrearIngresoComponent},
   { path: 'crear-egr_archivo/:id', component: CrearEgresoarchivoComponent},
-
+  { path: 'crear-usuarios_supervisor', component: CrearUsuariosSupervisorComponent},
   
 
-
+  
   
 
 ];

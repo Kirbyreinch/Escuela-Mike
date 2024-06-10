@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./inicio-supervisor.component.css">
+    <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container" >
+        <div class="form-row">
+            <div class="form-header">
+                <h2>Escuelas</h2>
+            </div>
+        </div>
+        <div class="form-row" style="margin-top: 10px ;">
+
+         
+            <div class="form-group">
+                <div *ngFor="let logo of logos" (click)="redirectToHome(logo.nombre)">
+                    <img class="btnlogo" [src]="logo.logo" alt="logo {{ logo.nombre }}" >
+                  </div>
+            </div>
+
+        </div>
+        <div class="form-row" >
+            <div class="form-group" style="flex-direction: row; justify-content: center;">
+                <button class="send-form" [routerLink]="['/crear-escuela']">Añadir escuela</button>
+
+
+         
+                <button class="send-form" [routerLink]="['/crear-usuarios_supervisor']" style="margin-left: 10px;">Asignar director</button>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
+</body>
+</html>

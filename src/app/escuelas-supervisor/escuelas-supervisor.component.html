@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./escuelas-supervisor.component.css">
+    <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
+    <style>
+        /* Establece un ancho fijo para las primeras cuatro columnas */
+        table th:nth-child(-n+1),
+        table td:nth-child(-n+1) {
+            min-width: 500px; /* Ajusta este valor según sea necesario */
+            max-width: 500px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        /* Establece la barra de desplazamiento horizontal */
+        .table-container {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="form-group">
+            <div class="form-row" style="margin-top: 60px;">
+                <div class="form-header">
+                    <h2>Escuelas</h2>
+                </div>
+            </div>
+            <div class="form-row" style="border-bottom: 2px solid lightgray; margin-top: 10px; padding: 5px;">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Buscar..." [(ngModel)]="filtro" (keyup)="aplicarFiltro()">
+                    <div class="combo-box-container">
+                        <select class="combo-box" [(ngModel)]="filtroSeleccionado" (change)="aplicarFiltro()">
+                            <option value="escuela">Escuela</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="table-container">
+                <table style="width: fit-content;">
+                    <thead>
+                        <tr>
+                            <th>ESCUELAS</th>
+                            <th>
+                                <button class="btn" [routerLink]="['/crear-escuela']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                                    <i class="fa-solid fa-plus"></i> Registrar
+                                </button>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let escuela of escuelas">
+                            <td>{{ escuela.escuela }}</td>
+                            <td> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

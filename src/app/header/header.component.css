@@ -47,7 +47,10 @@ nav ul li {
   width: auto;
   height: auto;
 }
-
+a{
+  text-decoration: none;
+  color: inherit;
+}
 
 .right-section button {
     font-size: 20px; /* Ajusta el tamaño según tus preferencias */

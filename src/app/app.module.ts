@@ -46,6 +46,9 @@ import { CrearEgresoarchivoComponent } from './crear-egresoarchivo/crear-egresoa
 import { IngresolosComponent } from './ingresolos/ingresolos.component';
 import { DocumentoComponent } from './documento/documento.component';
 import { PruebasComponent } from './pruebas/pruebas.component';
+import { InicioSupervisorComponent } from './inicio-supervisor/inicio-supervisor.component';
+import { EscuelasSupervisorComponent } from './escuelas-supervisor/escuelas-supervisor.component';
+import { CrearUsuariosSupervisorComponent } from './crear-usuarios-supervisor/crear-usuarios-supervisor.component';
 
 
 @NgModule({
@@ -77,7 +80,10 @@ import { PruebasComponent } from './pruebas/pruebas.component';
     CrearEgresoarchivoComponent,
     IngresolosComponent,
     DocumentoComponent,
-    PruebasComponent
+    PruebasComponent,
+    InicioSupervisorComponent,
+    EscuelasSupervisorComponent,
+    CrearUsuariosSupervisorComponent
   ],
   imports: [
     BrowserModule,

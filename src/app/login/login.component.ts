@@ -58,8 +58,15 @@ export class LoginComponent implements OnInit {
                 }
               );
 
-              // Navega a la ruta de inicio en caso de éxito
-              this.router.navigate(['/inicio']);
+     // Verifica el rol del usuario y navega a la ruta correspondiente
+     if (userData.rol === 'supervisor') {
+      this.router.navigate(['/supervisor']);
+    } else {
+      this.router.navigate(['/inicio']);
+    }
+
+
+
             } else {
               console.error('Response does not have expected fields');
               this.loginError = true;

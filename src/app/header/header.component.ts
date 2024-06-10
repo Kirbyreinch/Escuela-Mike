@@ -11,6 +11,7 @@ import { filter } from 'rxjs/operators';
 export class HeaderComponent implements OnInit {
   username: string | null = null;
   escuelaLogo: string | null = null;
+  rol: string | null = null; // Variable para almacenar el rol del usuario
 
   constructor(private router: Router, private authService: AuthService) { }
 
@@ -51,6 +52,14 @@ export class HeaderComponent implements OnInit {
         }
       );
     }
+
+    // Obtener el rol del usuario desde localStorage
+    this.rol = localStorage.getItem('rol');
+  }
+
+  // Método para verificar si el rol es "supervisor"
+  isSupervisor(): boolean {
+    return this.rol === 'supervisor';
   }
 
   shouldShowMiddleSection(): boolean {

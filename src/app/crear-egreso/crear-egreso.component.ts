@@ -19,6 +19,7 @@ export class CrearEgresoComponent implements OnInit {
     id_expense: '',
     file: '',
   };
+  cbegresos: any = [];
 
   errorMessage: string = '';
 
@@ -32,6 +33,7 @@ export class CrearEgresoComponent implements OnInit {
     if (escuela && user_register) {
       this.egresos.escuela_nombre = escuela;
       this.egresos.user_register = user_register;
+      this.loadexpensescombobox();
     } else {
       this.errorMessage = 'Error: No se pudieron cargar los datos del usuario o escuela';
     }
@@ -47,6 +49,22 @@ export class CrearEgresoComponent implements OnInit {
       (error) => {
         console.error('Error al crear egreso:', error);
         this.errorMessage = 'Datos incorrectos o repetidos';
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 2000);
+      }
+    );
+  }
+
+  loadexpensescombobox() {
+    this.authService.getCategoriaegreso().subscribe(
+      (response) => {
+        console.log('egresos:', response);
+        this.cbegresos = response;
+      },
+      (error) => {
+        console.error('Error al cargar egresos:', error);
+        this.errorMessage = 'Error al cargar egresos';
         setTimeout(() => {
           this.errorMessage = '';
         }, 2000);

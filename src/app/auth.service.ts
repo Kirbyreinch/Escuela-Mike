@@ -63,6 +63,26 @@ export class AuthService {
 
 
 
+
+  //ESSCUELAS//
+
+
+
+  getEscuelas_supervisor(): Observable<any[]> {
+    const url = `${this.apiurl}/escuela/consulta/`; 
+    return this.http.get<any[]>(url);
+  }
+
+
+  
+
+  getEscuelaPorNombre(nombre: string): Observable<any> {
+    const url = `${this.apiurl}/escuela/consulta/{escuela}?school=${nombre}`;
+    return this.http.get<any>(url);
+  }
+
+
+
   getEscuelas(): Observable<any> {
     const escuela = localStorage.getItem('escuela');
     if (!escuela) {
@@ -73,13 +93,17 @@ export class AuthService {
   }
   
 
+
   getEscuelaByNombre(escuela: string): Observable<any> {
     const url = `${this.apiurl}/escuela/consulta/{escuela}?school=${escuela}`;
     console.log('URL de la API:', url); // Verifica la URL
     return this.http.get<any>(url);
   }
 
-
+  getexpenses(): Observable<any[]> {
+    const url = `${this.apiurl}/categoria/consulta/all/egresos`; 
+    return this.http.get<any[]>(url);
+  }
 
   getCategoriaingreso(): Observable<any[]> {
     const url = `${this.apiurl}/categoria/consulta/ingresos`; 

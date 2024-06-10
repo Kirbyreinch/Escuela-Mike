@@ -33,8 +33,41 @@ export class CrearEscuelaComponent {
   constructor(private authService: AuthService, private router: Router) {}
 
   onSubmit() {
-
-
+    // Verifica si los campos obligatorios están llenos
+    if (
+      !this.nombre || !this.logo || 
+      !this.usuario.clave || !this.usuario.domicilio ||
+      !this.usuario.localidad || !this.usuario.zona || !this.usuario.sector
+    ) {
+      let errorMessage = 'Por favor, complete los siguientes campos obligatorios:';
+      if (!this.nombre) {
+        errorMessage += ' Nombre,';
+      }
+      if (!this.logo) {
+        errorMessage += ' Logo,';
+      }
+      if (!this.usuario.clave) {
+        errorMessage += ' Clave,';
+      }
+      if (!this.usuario.domicilio) {
+        errorMessage += ' Domicilio,';
+      }
+      if (!this.usuario.localidad) {
+        errorMessage += ' Localidad,';
+      }
+      if (!this.usuario.zona) {
+        errorMessage += ' Zona,';
+      }
+      if (!this.usuario.sector) {
+        errorMessage += ' Sector,';
+      }
+      this.errorMessage = errorMessage;
+      setTimeout(() => {
+        this.errorMessage = '';
+      }, 2000);
+      return; // Detiene la ejecución si los campos obligatorios están vacíos
+    }
+  
     const requestData = {
       detalle_request: this.usuario,
       extra_request: this.extra
@@ -42,12 +75,16 @@ export class CrearEscuelaComponent {
     
     this.authService.crearEscuela(requestData, this.nombre, this.logo).subscribe(
       (response) => {
-        console.log('Usuario creado:', response);
-        this.router.navigate(['/escuelas']);
+        console.log('Escuela creada:', response);
+        this.router.navigate(['/supervisor_escuelas']);
       },
       (error) => {
-        console.error('Error al crear usuario:', error);
-        this.errorMessage = 'Datos incorrectos o inválidos';
+        console.error('Error al crear escuela:', error);
+        if (error.error && error.error.detail) {
+          this.errorMessage = error.error.detail;
+        } else {
+          this.errorMessage = 'Error: ' + error.statusText;
+        }
         setTimeout(() => {
           this.errorMessage = '';
         }, 2000);

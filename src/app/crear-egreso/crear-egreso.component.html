@@ -34,14 +34,16 @@
 
         <form (ngSubmit)="onSubmit()" class="container" style="padding: 30px;">
             <div class="form-row" style="border-bottom: 2px solid lightgray; margin-top: 10px;">
-              <div style="width: 90%;">
-                <h4>Informacion Basica</h4>
-              </div>
+                <div style="width: 90%;">
+                    <h4>Informacion Basica</h4>
+                </div>
             </div>
             <div class="form-row">
                 <div class="form-group">
                     <label for="Nombre">Numero de la categoria:</label>
-                    <input type="text" id="Nombre" name="Nombre" [(ngModel)]="egresos.category" required>
+                    <select name="" id="Nombre" name="Nombre" [(ngModel)]="egresos.category" required>
+                        <option *ngFor="let item of cbegresos" [value]="item.id">{{ item.nombre }}</option>
+                    </select>
                 </div>
             </div>
             <div class="form-row">
