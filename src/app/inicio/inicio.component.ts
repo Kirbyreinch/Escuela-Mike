@@ -25,13 +25,17 @@ export class InicioComponent implements OnInit {
   egresosPorAnoChart: any;
 
   constructor(private authService: AuthService, private el: ElementRef, private renderer: Renderer2) {}
-
+  escuelaLogo: string | null = null;
 
 
   
   ngOnInit() {
     this.fetchIngresoChartData('total');
     this.fetchEgresoChartData('total');
+    this.authService.logo$.subscribe(logo => {
+      this.escuelaLogo = logo;
+      console.log('Logo de la escuela:', this.escuelaLogo); // Console log for the logo
+    });
   }
 
 
