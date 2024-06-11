@@ -44,7 +44,9 @@
                 <table style="width: fit-content;">
                     <thead>
                         <tr>
-                            <th>ESCUELAS</th>
+                            <th>Escuelas</th>
+                            <th>Usernames</th>
+                            <th>Directores</th>
                             <th>
                                 <button class="btn" [routerLink]="['/crear-escuela']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
                                     <i class="fa-solid fa-plus"></i> Registrar
@@ -55,12 +57,24 @@
                     <tbody>
                         <tr *ngFor="let escuela of escuelas">
                             <td>{{ escuela.escuela }}</td>
+                            <td>{{ escuela.username }}</td>
+                            <td>{{ escuela.director }}</td>
                             <td> </td>
                         </tr>
                     </tbody>
+
+
+
                 </table>
+
+                <div *ngIf="successMessage" class="success-message">{{ successMessage }}</div>
             </div>
         </div>
+
+
+   
+
+
     </div>
 </body>
 </html>

@@ -59,9 +59,7 @@
                             <th>Grupos</th>
                             <th>Turno</th>
                             <th>
-                                <button class="btn" [routerLink]="['/crear-escuela']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
-                                    <i class="fa-solid fa-plus"></i> Registrar
-                                </button>
+                 
                             </th>
                         </tr>
                     </thead>
@@ -83,9 +81,9 @@
                             <td>{{ escuela.turno }}</td>
                             <td>
                                 <div style="display: flex; flex-direction: row;">
-                                    <button mat-button (click)="openConfirmationDialog(escuela.nombre)" class="btn" style="background-color: #f44336; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
-                                        <mat-icon>delete</mat-icon>
-                                    </button>
+                                 
+
+                                    
                                     <button mat-icon-button (click)="openModificarEscuela(escuela)" class="btn" style="background-color: rgb(223, 223, 26); border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
                                         <mat-icon>settings</mat-icon>
                                     </button>

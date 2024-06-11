@@ -15,21 +15,17 @@ export class CrearEgresoComponent implements OnInit {
     user_register: '',
   };
 
-  Files = {
-    id_expense: '',
-    file: '',
-  };
+  selectedFile: File | null = null;
   cbegresos: any = [];
-
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     // Recuperar valores del localStorage
     const escuela = localStorage.getItem('escuela');
     const user_register = localStorage.getItem('username');
-    
+
     if (escuela && user_register) {
       this.egresos.escuela_nombre = escuela;
       this.egresos.user_register = user_register;
@@ -39,16 +35,58 @@ export class CrearEgresoComponent implements OnInit {
     }
   }
 
+  onFileSelected(event: any) {
+    this.selectedFile = event.target.files[0];
+  }
+
   onSubmit() {
     this.authService.crearegreso(this.egresos).subscribe(
       (response) => {
         console.log('egreso creado:', response);
-        // Después de crear el egreso, registrar el archivo
-        this.registrarArchivo();
+        this.fetchAndLogLastEgreso(); // Llamar a la función para obtener el último egreso
+        this.router.navigate(['/iye']);
+
       },
       (error) => {
         console.error('Error al crear egreso:', error);
         this.errorMessage = 'Datos incorrectos o repetidos';
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 2000);
+      }
+    );
+  }
+
+  fetchAndLogLastEgreso() {
+    this.authService.getegreso().subscribe(
+      (egresos) => {
+        const ultimoEgreso = egresos[0]; // Asumimos que el último egreso es el primero en la lista
+        console.log('ID del egreso creado:', ultimoEgreso.id);
+        if (this.selectedFile) {
+          this.uploadFile(ultimoEgreso.id, this.selectedFile);
+        } else {
+          console.error('No se seleccionó ningún archivo');
+        }
+      },
+      (error) => {
+        console.error('Error al obtener los egresos:', error);
+        this.errorMessage = 'Error al obtener los egresos';
+        setTimeout(() => {
+          this.errorMessage = '';
+        }, 2000);
+      }
+    );
+  }
+
+  uploadFile(id_expense: number, file: File) {
+    this.authService.uploadFile(id_expense, file).subscribe(
+      (response) => {
+        console.log('Archivo subido exitosamente:', response);
+        this.router.navigate(['/iye']);
+      },
+      (error) => {
+        console.error('Error al subir el archivo:', error);
+        this.errorMessage = 'Error al subir el archivo';
         setTimeout(() => {
           this.errorMessage = '';
         }, 2000);
@@ -65,23 +103,6 @@ export class CrearEgresoComponent implements OnInit {
       (error) => {
         console.error('Error al cargar egresos:', error);
         this.errorMessage = 'Error al cargar egresos';
-        setTimeout(() => {
-          this.errorMessage = '';
-        }, 2000);
-      }
-    );
-  }
-
-  registrarArchivo() {
-    this.authService.ArchivoEgreso(this.Files.id_expense, this.Files.file).subscribe(
-      (response) => {
-        console.log('archivo creado:', response);
-        // Navegar a la página deseada después de completar el registro del archivo
-        this.router.navigate(['/iye']);
-      },
-      (error) => {
-        console.error('Error al crear archivo:', error);
-        this.errorMessage = 'Datos incorrectos o repetidos';
         setTimeout(() => {
           this.errorMessage = '';
         }, 2000);

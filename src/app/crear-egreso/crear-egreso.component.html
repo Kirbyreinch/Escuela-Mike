@@ -40,12 +40,13 @@
             </div>
             <div class="form-row">
                 <div class="form-group">
-                    <label for="Nombre">Numero de la categoria:</label>
+                    <label for="Nombre">Nombre de la categoria:</label>
                     <select name="" id="Nombre" name="Nombre" [(ngModel)]="egresos.category" required>
-                        <option *ngFor="let item of cbegresos" [value]="item.id">{{ item.nombre }}</option>
+                        <option *ngFor="let item of cbegresos" [value]="item.nombre">{{ item.nombre }}</option>
                     </select>
                 </div>
             </div>
+
             <div class="form-row">
                 <div class="form-group">
                     <label for="Cantidad">Cantidad:</label>
@@ -55,24 +56,14 @@
 
 
 
-
-
             <div class="form-row">
-
-
                 <div class="form-group">
-                    <label for="id">ID:</label>
-                    <input type="text" id="id" name="id" [(ngModel)]="Files.id_expense" required>
+                    <label for="ARCHIVO">ARCHIVO:</label>
+                    <input type="file" id="ARCHIVO" name="ARCHIVO" (change)="onFileSelected($event)">
                 </div>
-    
-                <div class="form-group">
-                    <label for="file">Archivo:</label>
-                    <input type="text" id="file" name="file" [(ngModel)]="Files.file" required>
-                </div>
-        
             </div>
 
-            
+
             <button type="submit" class="send-form">Añadir</button>
             <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
         </form>

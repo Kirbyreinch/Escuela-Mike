@@ -58,7 +58,8 @@
       </div>
       <div class="form-group">
         <label for="escuela-label">Escuela:</label>
-        <input type="text" id="escuela" name="escuela" [(ngModel)]="usuario.escuela" required>
+      <!-- Utiliza readonly para hacer el campo de entrada de la escuela de solo lectura -->
+      <input type="text" id="escuela" name="escuela" [(ngModel)]="usuario.escuela" readonly required>
       </div>
     </div>
     <div class="form-row" style="border-bottom: 2px solid lightgray; margin-top: 10px;">
@@ -71,7 +72,6 @@
       <select id="rol" [(ngModel)]="rol" name="rol" required>
         <option value="presidente">Presidente</option>
         <option value="tesorero">Tesorero</option>
-        <option value="director">Director</option>
       </select>
     </div>
     <button type="submit" class="send-form">Añadir</button>

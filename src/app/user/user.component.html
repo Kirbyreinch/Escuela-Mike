@@ -21,7 +21,7 @@
                         <select class="combo-box" [(ngModel)]="filtroSeleccionado" (change)="aplicarFiltro()">
                             <option value="id">ID</option>
                             <option value="rol">Rol</option>
-                            <option value="escuela">Escuela</option>
+                        
                         </select>
                     </div>
                 </div>
@@ -32,10 +32,11 @@
                       <th>ID</th>
                       <th>Username</th>
                       <th>Nombre</th>
+
                       <th>Apellido</th>
                       <th>Tel</th>
                       <th>Email</th>
-                      <th>Escuela</th>
+                 
                       <th>Rol</th>
                       <th>
                         <button class="btn"  [routerLink]="['/crear-usuarios']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
@@ -52,7 +53,7 @@
                     <td>{{ usuario.last_name }}</td>
                     <td>{{ usuario.tel }}</td>
                     <td>{{ usuario.email }}</td>
-                    <td>{{ usuario.escuela }}</td>
+           
                     <td>{{ usuario.rol }}</td>
                         <td>
                         <div  style="display: flex; flex-direction: row;">

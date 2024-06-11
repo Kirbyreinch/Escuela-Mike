@@ -14,12 +14,13 @@
         <li *ngIf="isSupervisor()"><a routerLink="/supervisor_escuelas">Escuelas</a></li>
 
 
-
+         <!-- Mostrar solo si el rol es "director" -->
+         <li *ngIf="isDirector()"><a routerLink="/user">Usuarios</a></li>
+         <li *ngIf="isDirector()"><a routerLink="/escuelas">Escuelas</a></li>
     
+         
         <!-- Mostrar solo si el rol NO es "supervisor" -->
         <li *ngIf="!isSupervisor()"><a routerLink="/inicio">Inicio</a></li>
-        <li *ngIf="!isSupervisor()"><a routerLink="/user">Usuarios</a></li>
-        <li *ngIf="!isSupervisor()"><a routerLink="/escuelas">Escuelas</a></li>
         <li *ngIf="!isSupervisor()"><a routerLink="/categorias">Categorias</a></li>
         <li *ngIf="!isSupervisor()"><a routerLink="/iye">Egresos</a></li>
         <li *ngIf="!isSupervisor()"><a routerLink="/iysine">Ingresos</a></li>

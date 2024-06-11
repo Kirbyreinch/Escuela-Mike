@@ -26,7 +26,7 @@ export class ModificarUsuarioComponent {
     this.nuevolast_name = data.last_name;
     this.nuevoemail = data.email;
     this.nuevotel = data.tel;
-    this.nuevoescuela = data.escuela;
+    this.nuevoescuela = localStorage.getItem('escuela') || ''; // Asigna el valor de la escuela del localStorage
   }
 
   cancelar(): void {
@@ -51,7 +51,7 @@ export class ModificarUsuarioComponent {
         console.log('Usuario modificado:', response);
         this.dialogRef.close(response);
       },
-  (error) => {
+      (error) => {
         console.error('Error al modificar el usuario:', error);
         this.errorMessage = 'Error al actualizar el usuario'; // Mensaje de error
         setTimeout(() => {

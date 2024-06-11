@@ -25,7 +25,7 @@ export class UserComponent implements OnInit {
   }
 
   loadUsuarios() {
-    this.authService.getUsuarios().subscribe(
+    this.authService.getusuariosPorEscuela().subscribe(
       (usuarios) => {
         this.usuarios = usuarios;
         this.usuariosOriginal = [...usuarios];

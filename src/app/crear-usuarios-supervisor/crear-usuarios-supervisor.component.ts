@@ -59,11 +59,12 @@ export class CrearUsuariosSupervisorComponent implements OnInit {
       }, 2000);
       return; // Detiene la ejecución si los campos obligatorios están vacíos
     }
-  
+
     this.authService.crearUsuario(this.usuario, this.rol, this.password).subscribe(
       (response) => {
-        console.log('Usuario creado:', response);
-        this.router.navigate(['/supervisor']);
+        console.log('Usuario creado:', response); // Aquí se registra la respuesta de la API
+        const mensaje = response.mensaje;
+        this.router.navigate(['/supervisor_escuelas'], { state: { mensaje } });
       },
       (error) => {
         console.error('Error al crear usuario:', error);

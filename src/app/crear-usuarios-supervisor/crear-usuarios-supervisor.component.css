@@ -212,7 +212,12 @@ input:focus, textarea:focus, select:focus{
         width: 35%;
     }
 
-
+    .success-message {
+        color: green;
+        font-weight: bold;
+        margin-top: 10px;
+        text-align: center;
+      }
 
       
 

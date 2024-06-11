@@ -41,17 +41,7 @@ export class IyeComponent implements OnInit {
     this.userRole = localStorage.getItem('rol') || '';
   }
 
-  loadingresos() {
-    this.authService.getingreso().subscribe(
-      (ingresos) => {
-        this.ingresos = ingresos;
-        this.ingresosOriginal = [...ingresos];
-      },
-      (error) => {
-        console.error('Error al obtener la lista de ingresos', error);
-      }
-    );
-  }
+
 
   loadegresos() {
     this.authService.getegreso().subscribe(
@@ -60,7 +50,7 @@ export class IyeComponent implements OnInit {
         this.egresos.forEach(egreso => {
           this.authService.getarchivo(egreso.id).subscribe(
             (archivo) => {
-              egreso.archivoLink = archivo.archivo;
+              egreso.archivoLink = archivo.archivo; // Asegúrate de que este campo contiene la URL correcta del PDF
               egreso.estado = archivo.validado;
   
               // Determinar el campo de rol en función del rol del usuario
@@ -166,7 +156,6 @@ export class IyeComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
-        this.loadingresos(); // Recargar la lista de categorías después de modificar
         this.loadegresos();
       }
     });
@@ -175,13 +164,18 @@ export class IyeComponent implements OnInit {
 
 
 
-
-
-
-
   openArchivos(archivoLink: string) {
-    // Abrir el enlace en una nueva pestaña del navegador
-    window.open(archivoLink, '_blank');
+    this.authService.getfile(archivoLink).subscribe(
+      (data: Blob) => {
+        // Crear una URL para la imagen
+        const imageUrl = URL.createObjectURL(data);
+        // Abrir la imagen en una nueva ventana del navegador
+        window.open(imageUrl);
+      },
+      (error) => {
+        console.error('Error al obtener la imagen:', error);
+      }
+    );
   }
 
   openArchivo(id_expense: string) {
@@ -220,18 +214,35 @@ export class IyeComponent implements OnInit {
 
 
 
-
-
-
-
-
   validarEgreso(id: string) {
     const user_register = localStorage.getItem('username') || ''; // Obtener el nombre de usuario del localStorage
-    this.authService.validarArchivo(id, user_register ).subscribe(
+  
+    // Obtener el archivo asociado al egreso seleccionado
+    this.authService.getexpensefiles(id).subscribe(
+      (archivo) => {
+        console.log('Archivo obtenido:', archivo);
+        const idExpenses = archivo.id;
+  
+        // Usar el id_expenses para validar el archivo
+        console.log('Enviando solicitud de validación para id_expenses:', idExpenses);
+        this.validarArchivo(idExpenses, user_register);
+      },
+      (error) => {
+        console.error('Error al obtener el archivo:', error);
+      }
+    );
+  }
+  
+  validarArchivo(idExpenses: string, userRegister: string) {
+    // Imprimir los datos que se envían en la solicitud HTTP
+    console.log('Validando archivo con id_expenses:', idExpenses);
+    console.log('Usuario registrado:', userRegister);
+  
+    // Llamar a la función validarArchivo con el id_expenses y el usuario registrado
+    this.authService.validarArchivo(idExpenses, userRegister).subscribe(
       (response) => {
-        // Aquí puedes manejar la respuesta de la validación si es necesario
         console.log('Archivo validado correctamente:', response);
-        this.loadegresos();
+        this.loadegresos(); // Actualizar la lista de egresos si es necesario
       },
       (error) => {
         console.error('Error al validar el archivo:', error);
@@ -239,6 +250,10 @@ export class IyeComponent implements OnInit {
     );
   }
 
+
+
+
+  
 
 
 }

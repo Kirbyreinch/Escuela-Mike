@@ -27,7 +27,6 @@
                     <div class="combo-box-container">
                         <select class="combo-box" [(ngModel)]="filtroSeleccionadoEgresos" (change)="aplicarFiltroEgresos()">
                             <option value="id">ID</option>
-                            <option value="nombre">Escuela</option>
                             <option value="category">Categoria</option>
 
                         </select>
@@ -82,7 +81,7 @@
 
                             <button mat-button (click)="openArchivos(egreso.archivoLink)" style="background-color: #5b6ce9; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
                                 <mat-icon>link</mat-icon>
-                              </button>
+                            </button>
                           
                         </div>
                       </td>

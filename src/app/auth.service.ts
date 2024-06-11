@@ -62,7 +62,21 @@ export class AuthService {
   }
 
 
+  getDirectoresPorEscuela(escuela: string): Observable<any[]> {
+    const url = `${this.apiurl}/users/info/consulta/escuela/${escuela}?activate=true`;
+    return this.http.get<any[]>(url);
+  }
 
+
+
+  getusuariosPorEscuela(): Observable<any[]> {
+    const escuela = localStorage.getItem('escuela');
+    if (!escuela) {
+      throw new Error('No hay ninguna escuela en el localStorage');
+    }
+    const url = `${this.apiurl}/users/info/consulta/escuela/${escuela}?activate=true`;
+    return this.http.get<any[]>(url);
+  }
 
   //ESSCUELAS//
 
@@ -73,8 +87,6 @@ export class AuthService {
     return this.http.get<any[]>(url);
   }
 
-
-  
 
   getEscuelaPorNombre(nombre: string): Observable<any> {
     const url = `${this.apiurl}/escuela/consulta/{escuela}?school=${nombre}`;
@@ -106,12 +118,14 @@ export class AuthService {
   }
 
   getCategoriaingreso(): Observable<any[]> {
-    const url = `${this.apiurl}/categoria/consulta/ingresos`; 
+    const escuela = localStorage.getItem('escuela');
+    const url = `${this.apiurl}/categoria/consulta/escuela/ingresos?nombre_escuela=${escuela}`; 
     return this.http.get<any[]>(url);
   }
 
   getCategoriaegreso(): Observable<any[]> {
-    const url = `${this.apiurl}/categoria/consulta/egresos`; 
+    const escuela = localStorage.getItem('escuela');
+    const url = `${this.apiurl}/categoria/consulta/escuela/egresos?nombre_escuela=${escuela}`; 
     return this.http.get<any[]>(url);
   }
 
@@ -311,7 +325,11 @@ export class AuthService {
   }
 
 
-
+  getfile(name_file: string): Observable<Blob> {
+    const url = `${this.apiurl}/file/${name_file}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
+  
 
 
 
@@ -323,6 +341,16 @@ export class AuthService {
   }
 
 
+
+
+  
+  uploadFile(id_expense: number, file: File): Observable<any> {
+    const formData: FormData = new FormData();
+    formData.append('file', file, file.name);
+    
+    const url = `${this.apiurl}/expenses/saveFiles?id_expense=${id_expense}`;
+    return this.http.post<any>(url, formData);
+  }
 
   getarchivo(id_expense: string): Observable<any> {
     const url = `${this.apiurl}/expensesFile/consultar/${id_expense}`;
@@ -405,6 +433,10 @@ export class AuthService {
     console.log(`Sending request to URL: ${url}?${params.toString()}`);
     return this.http.post(url, null, { params });
   }
+
+
+
+
 
 
 
@@ -543,12 +575,13 @@ modificarEscuela(school: string, nuevoname: string): Observable<any> {
 
 
 
-modificarCategoria(nombreActual: string, tipoActual: string, id: number, nuevoNombre: string, nuevoIdentificador: string): Observable<any> {
+modificarCategoria(nombreActual: string, tipoActual: string, id: number, nuevoNombre: string, nuevoIdentificador: string, escuelaNombre:string): Observable<any> {
   const url = `${this.apiurl}/categoria/actualizar?categoria_nombre=${nombreActual}&categoria_tipo=${tipoActual}`;
   const body = {
     id: id,
     nombre: nuevoNombre,
-    identificador: nuevoIdentificador
+    identificador: nuevoIdentificador,
+    escuela_nombre:escuelaNombre
   };
   
   // Log para depuración
@@ -567,6 +600,9 @@ validarArchivo(id: string, user_register: string): Observable<any> {
   console.log('URL para validar:', url); 
   return this.http.put<any>(url, {});
 }
+
+
+
 
 
 }

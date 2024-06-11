@@ -62,6 +62,14 @@ export class HeaderComponent implements OnInit {
     return this.rol === 'supervisor';
   }
 
+
+
+    // Método para verificar si el rol es "director"
+    isDirector(): boolean {
+      return this.rol === 'director';
+    }
+
+
   shouldShowMiddleSection(): boolean {
     return this.router.url !== '/login';
   }

@@ -11,12 +11,21 @@ export class CrearCategoriaingComponent {
   categorias = {
     id: 0,  // Establecer el id predeterminado a 0
     nombre: '',
-    identificador: 'ing'  // Establecer el valor predeterminado del identificador
+    identificador: 'ing', // Establecer el valor predeterminado del identificador
+    escuela_nombre: ''
   };
 
   errorMessage: string = '';
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router) {
+    // Obtener la escuela del almacenamiento local
+
+
+    const storedEscuela = localStorage.getItem('escuela');
+    if (storedEscuela) {
+      this.categorias.escuela_nombre = storedEscuela;
+    }
+  }
 
   onSubmit() {
     // Asegurarse de que el identificador tenga el valor correcto
@@ -29,10 +38,14 @@ export class CrearCategoriaingComponent {
       },
       (error) => {
         console.error('Error al crear categoria:', error);
-        this.errorMessage = 'Datos incorrectos o inválidos';
+        if (error.status === 400 && error.error && error.error.detail) {
+          this.errorMessage = error.error.detail; // Asignar el mensaje de error de la API
+        } else {
+          this.errorMessage = 'Datos incorrectos o inválidos'; // Mensaje genérico
+        }
         setTimeout(() => {
           this.errorMessage = '';
-        }, 2000);
+        }, 5000); // Limpiar el mensaje después de 5 segundos
       }
     );
   }
