@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-inicio-supervisor',
   templateUrl: './inicio-supervisor.component.html',
-  styleUrl: './inicio-supervisor.component.css'
+  styleUrls: ['./inicio-supervisor.component.css']
 })
 export class InicioSupervisorComponent implements OnInit {
   logos: { nombre: string, logo: string }[] = []; // Se define un array de objetos con nombre y logo
@@ -43,5 +43,11 @@ export class InicioSupervisorComponent implements OnInit {
     this.router.navigate(['/inicio']);
   }
 
-  // La función getEscuelaFromLogo no es necesaria, ya que ahora se extrae el nombre de la escuela directamente
+  getLogoRows(): Array<{ nombre: string, logo: string }[]> {
+    const rows: Array<{ nombre: string, logo: string }[]> = [];
+    for (let i = 0; i < this.logos.length; i += 4) {
+      rows.push(this.logos.slice(i, i + 4));
+    }
+    return rows;
+  }
 }

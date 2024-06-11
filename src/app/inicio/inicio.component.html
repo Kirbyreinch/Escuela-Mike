@@ -13,7 +13,7 @@
     <div class="container" >
         <div class="form-row" style="margin-top: 80px ;">
             <img class="logo"
-            src="https://upload.wikimedia.org/wikipedia/commons/b/b2/UAS_logo.png" 
+            [src]="escuelaLogo"
             alt="logo uas" >
             <div class="form-header">
                 <h2>Universidad Autonoma de Sinaloa</h2>
@@ -34,7 +34,16 @@
                 </div>
             </div>
         </div>
-
+        <div class="form-row">
+            <div class="form-group">
+                <div class="form-group">
+                    <label for="Descargaar">Descargar documento</label>
+                    <button class="btn"  [routerLink]="['/pdf']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
+                        <i class="fa-solid fa-plus"></i>
+                    Descargar PDF </button>
+                </div>
+            </div>
+        </div>
         <div class="form-row" style="border-bottom: 2px solid lightgray; margin-top: 10px; padding: 5px;">
             <div style="width: 90%;">
                 <h4 >Datos</h4>
@@ -143,15 +152,7 @@
  
 
 
-
-
-<!--
-        <div class="form-group">
-            <label for="Descargaar">Descargar documento</label>
-            <button class="btn"  [routerLink]="['/pdf']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
-                <i class="fa-solid fa-plus"></i>
-          Descargar PDF </button>
-        </div>-->
+        
   
     <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
 </body>
