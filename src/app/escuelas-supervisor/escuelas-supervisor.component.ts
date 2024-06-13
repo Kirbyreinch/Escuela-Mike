@@ -6,6 +6,7 @@ import { EliminarEscuelasComponent } from '../eliminar-escuelas/eliminar-escuela
 import { ModificarEscuelaAlumnadoComponent } from '../modificar-escuela-alumnado/modificar-escuela-alumnado.component';
 import { ModificarEscuelaLocalizacionComponent } from '../modificar-escuela-localizacion/modificar-escuela-localizacion.component';
 import { Router } from '@angular/router';
+import { EliminarUsuarioComponent } from '../eliminar-usuario/eliminar-usuario.component';
 
 
 @Component({
@@ -19,6 +20,10 @@ export class EscuelasSupervisorComponent implements OnInit {
   filtro: string = '';
   filtroSeleccionado: string = 'escuela';
   successMessage: string = ''; // Añadido para el mensaje de éxito
+
+  usuarios: any[] = [];
+  usuariosOriginal: any[] = [];
+
 
   constructor(private authService: AuthService, private dialog: MatDialog, private router: Router) {}
 
@@ -71,22 +76,19 @@ export class EscuelasSupervisorComponent implements OnInit {
     );
   }
 
+
+
   loadDirectores(): void {
     this.escuelas.forEach((escuela) => {
       this.authService.getDirectoresPorEscuela(escuela.escuela).subscribe(
         (directores) => {
-          // Filtra los directores para obtener solo aquellos que tienen el rol "director"
           const directoresDirector = directores.filter((director) => director.rol === 'director');
-
-          // Obtiene el nombre del primer director (si existe) o muestra 'N/A' si no hay directores con el rol "director"
           const nombreDirector = directoresDirector.length > 0 ? directoresDirector[0].name : 'N/A';
-          
-          // Obtiene el nombre de usuario del primer director (si existe) o muestra 'N/A' si no hay directores con el rol "director"
           const usernameDirector = directoresDirector.length > 0 ? directoresDirector[0].username : 'N/A';
-
-          // Añade los datos del director y el nombre de usuario a la escuela
+          const iddirector = directoresDirector.length > 0 ? directoresDirector[0].id : 'N/A';
           escuela.director = nombreDirector;
           escuela.username = usernameDirector;
+          escuela.id = iddirector;
         },
         (error) => {
           console.error(`Error al obtener los directores de ${escuela.escuela}`, error);
@@ -94,4 +96,39 @@ export class EscuelasSupervisorComponent implements OnInit {
       );
     });
   }
+
+
+
+
+
+  openConfirmationDialog(user_id: string) {
+    console.log('user_id seleccionado:', user_id);
+    const dialogRef = this.dialog.open(EliminarUsuarioComponent, {
+      width: '400px',
+      data: { user_id }
+    });
+  
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.eliminarUsuario(user_id);
+      }
+    });
+  }
+
+
+  
+  eliminarUsuario(user_id: string) {
+    this.authService.eliminarUsuario(user_id).subscribe(
+      () => {
+        console.log('Usuario eliminado exitosamente');
+        this.usuarios = this.usuarios.filter(usuario => usuario.id !== user_id);
+        this.loadEscuelas();
+        this.loadDirectores();
+      },
+      (error) => {
+        console.error('Error al eliminar el usuario', error);
+      }
+    );
+  }
+
 }

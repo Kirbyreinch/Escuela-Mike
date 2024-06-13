@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-inicio-supervisor',
@@ -8,7 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./inicio-supervisor.component.css']
 })
 export class InicioSupervisorComponent implements OnInit {
-  logos: { nombre: string, logo: string }[] = []; // Se define un array de objetos con nombre y logo
+  logos: { nombre: string, logo: string }[] = []; // Array para almacenar los nombres y URLs de las imágenes
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -23,7 +24,12 @@ export class InicioSupervisorComponent implements OnInit {
           this.authService.getEscuelaPorNombre(escuela.escuela).subscribe(
             (data) => {
               if (data.logo) {
-                this.logos.push({ nombre: escuela.escuela, logo: data.logo });
+                const logoObservable = this.authService.getlogofile(data.logo); // Obtener el observable de la imagen
+                this.convertBlobToUrl(logoObservable).then((logoUrl) => {
+                  if (logoUrl) {
+                    this.logos.push({ nombre: escuela.escuela, logo: logoUrl });
+                  }
+                });
               }
             },
             (error) => {
@@ -36,6 +42,16 @@ export class InicioSupervisorComponent implements OnInit {
         console.error('Error al cargar las escuelas:', error);
       }
     );
+  }
+
+  async convertBlobToUrl(blobObservable: Observable<Blob>): Promise<string | null> {
+    const blob = await blobObservable.toPromise();
+    if (blob) {
+      return URL.createObjectURL(blob);
+    } else {
+      console.error('Error: Blob is undefined');
+      return null;
+    }
   }
 
   redirectToHome(nombreEscuela: string) {

@@ -12,17 +12,20 @@ export class HeaderComponent implements OnInit {
   username: string | null = null;
   escuelaLogo: string | null = null;
   rol: string | null = null; // Variable para almacenar el rol del usuario
+  
 
   constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.authService.username$.subscribe(username => {
       this.username = username;
+    
     });
 
     this.authService.logo$.subscribe(logo => {
       this.escuelaLogo = logo;
       console.log('Logo de la escuela:', this.escuelaLogo); // Console log for the logo
+      this.openLogo();
     });
 
     // Listen to navigation events to update the header on route change
@@ -62,13 +65,10 @@ export class HeaderComponent implements OnInit {
     return this.rol === 'supervisor';
   }
 
-
-
-    // Método para verificar si el rol es "director"
-    isDirector(): boolean {
-      return this.rol === 'director';
-    }
-
+  // Método para verificar si el rol es "director"
+  isDirector(): boolean {
+    return this.rol === 'director';
+  }
 
   shouldShowMiddleSection(): boolean {
     return this.router.url !== '/login';
@@ -83,5 +83,21 @@ export class HeaderComponent implements OnInit {
     this.authService.updateUsername('');
     this.authService.updateLogo('');
     this.router.navigate(['/login']);
+  }
+  openLogo() {
+    if (this.escuelaLogo) {
+      this.authService.getlogofile(this.escuelaLogo).subscribe(
+        (data: Blob) => {
+          const imageUrl = URL.createObjectURL(data);
+          // Asignar la URL de la imagen al atributo src de la etiqueta <img>
+          this.escuelaLogo = imageUrl;
+        },
+        (error) => {
+          console.error('Error al obtener la imagen:', error);
+        }
+      );
+    } else {
+      console.error('El nombre del logo no está definido');
+    }
   }
 }

@@ -1,8 +1,7 @@
 <header>
   <div class="left-section">
-    <!-- Aquí se muestra el logo siempre -->
     <div class="logo-container" *ngIf="escuelaLogo">
-      <img [src]="escuelaLogo" alt="Logo de la escuela"/>
+      <img [src]="escuelaLogo" alt="Logo de la escuela" (click)="openLogo()">
     </div>
   </div>
 

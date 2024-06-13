@@ -36,54 +36,32 @@ export class LoginComponent implements OnInit {
           // Verifica el contenido de la respuesta
           console.log('API response:', response);
 
-          // Verifica si response es un array y contiene los campos esperados
-          if (Array.isArray(response) && response.length > 0) {
-            const userData = response[0];
-            if (typeof userData.id === 'number' && typeof userData.rol === 'string' && typeof userData.escuela === 'string') {
-              localStorage.setItem('username', username);
-              localStorage.setItem('password', password);
-              localStorage.setItem('id', userData.id.toString());
-              localStorage.setItem('rol', userData.rol);
-              localStorage.setItem('escuela', userData.escuela);
+          // Guardar datos comunes en localStorage
+          localStorage.setItem('username', username);
+          localStorage.setItem('id', response.id.toString());
+          localStorage.setItem('rol', response.rol);
 
-              // Update the AuthService with the new data
-              this.authService.updateUsername(username);
+          // Guardar datos específicos de 'director' en localStorage
+          if (response.escuela) {
+            localStorage.setItem('escuela', response.escuela);
+            this.authService.getEscuelaByNombre(response.escuela).subscribe(
+              (escuelaResponse) => {
+                this.authService.updateLogo(escuelaResponse.logo);
+              },
+              (error) => {
+                console.error('Error al obtener los datos de la escuela', error);
+              }
+            );
+          }
 
-              this.authService.getEscuelaByNombre(userData.escuela).subscribe(
-                (response) => {
-                  this.authService.updateLogo(response.logo);
-                },
-                (error) => {
-                  console.error('Error al obtener los datos de la escuela', error);
-                }
-              );
-
-     // Verifica el rol del usuario y navega a la ruta correspondiente
-     if (userData.rol === 'supervisor') {
-      this.router.navigate(['/supervisor']);
-    } else {
-      this.router.navigate(['/inicio']);
-    }
-
-
-
-            } else {
-              console.error('Response does not have expected fields');
-              this.loginError = true;
-              setTimeout(() => {
-                this.loginError = false;
-              }, 2000);
-            }
+          // Verifica el rol del usuario y navega a la ruta correspondiente
+          if (response.rol === 'supervisor') {
+            this.router.navigate(['/supervisor']);
           } else {
-            console.error('Response is not an array or empty');
-            this.loginError = true;
-            setTimeout(() => {
-              this.loginError = false;
-            }, 2000);
+            this.router.navigate(['/inicio']);
           }
         },
         error => {
-          // Maneja el error (puedes mostrar un mensaje al usuario)
           console.error('Error al iniciar sesión', error);
           this.loginError = true;
           setTimeout(() => {
@@ -92,7 +70,6 @@ export class LoginComponent implements OnInit {
         }
       );
     } else {
-      // Maneja el caso donde el formulario no es válido
       console.warn('Formulario no válido');
       this.loginError = true;
       setTimeout(() => {

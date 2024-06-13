@@ -141,4 +141,22 @@ export class EscuelasComponent implements OnInit {
   }
 
 
+
+
+
+
+  openlogo(name_logo: string) {
+    this.authService.getlogofile(name_logo).subscribe(
+      (data: Blob) => {
+        // Crear una URL para la imagen
+        const imageUrl = URL.createObjectURL(data);
+        // Abrir la imagen en una nueva ventana del navegador
+        window.open(imageUrl);
+      },
+      (error) => {
+        console.error('Error al obtener la imagen:', error);
+      }
+    );
+  }
+
 }

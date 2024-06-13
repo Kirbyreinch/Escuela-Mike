@@ -50,7 +50,22 @@ export class AuthService {
       .set('password', password);
     const url = `${this.apiurl}/login`;
     console.log(`Sending request to URL: ${url}?${params.toString()}`);
-    return this.http.post(url, null, { params });
+    return this.http.post(url, null, { params }).pipe(
+      map((response: any) => {
+        // Si la respuesta es un array, asumimos que contiene los datos del usuario
+        if (Array.isArray(response) && response.length > 0) {
+          const userData = response[0];
+          const user = {
+            id: userData.id,
+            rol: userData.rol,
+            escuela: userData.escuela || null // Manejar el caso en el que 'escuela' podría no estar presente
+          };
+          return user;
+        } else {
+          throw new Error('Invalid response format');
+        }
+      })
+    );
   }
 
 
@@ -86,6 +101,12 @@ export class AuthService {
     const url = `${this.apiurl}/escuela/consulta/`; 
     return this.http.get<any[]>(url);
   }
+
+
+
+
+
+
 
 
   getEscuelaPorNombre(nombre: string): Observable<any> {
@@ -292,6 +313,7 @@ export class AuthService {
     return this.http.get<any>(url);
   }
  
+
   Egresos_TodosAños(): Observable<any> {
     const escuela = localStorage.getItem('escuela');
     if (!escuela) {
@@ -327,14 +349,12 @@ export class AuthService {
 
   getfile(name_file: string): Observable<Blob> {
     const url = `${this.apiurl}/file/${name_file}`;
+    console.log('Requesting image from URL:', url); // Console log for the request URL
     return this.http.get(url, { responseType: 'blob' });
   }
-  
 
 
 
-
-  
   getexpensefiles(id_expenses: string): Observable<any> {
     const url = `${this.apiurl}/expensesFile/consultar/${id_expenses}`;
     return this.http.get<any>(url);
@@ -358,7 +378,10 @@ export class AuthService {
   }
 
 
-
+  getlogofile(name_logo: string): Observable<any> {
+    const url = `${this.apiurl}/logo/${name_logo}`;
+    return this.http.get(url, { responseType: 'blob' });
+  }
 
 
 
@@ -380,16 +403,26 @@ export class AuthService {
 
 
 
-  crearEscuela(usuario: any, nombre: string, logo:string): Observable<any> {
+  crearEscuela(usuario: any, nombre: string): Observable<any> {
     const params = new HttpParams()
       .set('nombre', nombre)
-      .set('logo', logo)
     const requestUrl = `${this.apiurl}/escuela/create`;
     console.log('Dirección de la solicitud:', requestUrl);
     console.log('Datos enviados:', usuario);
     console.log('Parámetros nombre:', { nombre });
     return this.http.post(requestUrl, usuario, { params });
   }
+
+
+
+  crearlogo(nombreEscuela: string, logo: FormData): Observable<any> {
+    const params = new HttpParams().set('nombre_escuela', nombreEscuela);
+    const requestUrl = `${this.apiurl}/escuela/saveLogo`;
+    console.log('Dirección de la solicitud:', requestUrl);
+    return this.http.post(requestUrl, logo, { params });
+  }
+
+ 
 
 
 
