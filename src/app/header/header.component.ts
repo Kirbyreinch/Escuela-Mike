@@ -12,14 +12,13 @@ export class HeaderComponent implements OnInit {
   username: string | null = null;
   escuelaLogo: string | null = null;
   rol: string | null = null; // Variable para almacenar el rol del usuario
-  
+  hideLogo: boolean = false; // Variable para determinar si se debe ocultar el logo
 
   constructor(private router: Router, private authService: AuthService) { }
 
   ngOnInit(): void {
     this.authService.username$.subscribe(username => {
       this.username = username;
-    
     });
 
     this.authService.logo$.subscribe(logo => {
@@ -33,9 +32,11 @@ export class HeaderComponent implements OnInit {
       filter(event => event instanceof NavigationEnd)
     ).subscribe(() => {
       this.updateUserInfo();
+      this.checkRoute(); // Check route on navigation
     });
 
     this.updateUserInfo();
+    this.checkRoute(); // Check route on initial load
   }
 
   updateUserInfo(): void {
@@ -84,6 +85,7 @@ export class HeaderComponent implements OnInit {
     this.authService.updateLogo('');
     this.router.navigate(['/login']);
   }
+
   openLogo() {
     if (this.escuelaLogo) {
       this.authService.getlogofile(this.escuelaLogo).subscribe(
@@ -99,5 +101,11 @@ export class HeaderComponent implements OnInit {
     } else {
       console.error('El nombre del logo no está definido');
     }
+  }
+
+  // Método para verificar la ruta actual
+  checkRoute() {
+    const currentRoute = this.router.url;
+    this.hideLogo = ['/supervisor', '/datos_supervisor', '/supervisor_escuelas'].includes(currentRoute);
   }
 }

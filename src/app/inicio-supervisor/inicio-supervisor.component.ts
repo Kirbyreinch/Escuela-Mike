@@ -12,8 +12,13 @@ export class InicioSupervisorComponent implements OnInit {
   logos: { nombre: string, logo: string }[] = []; // Array para almacenar los nombres y URLs de las imágenes
 
   constructor(private authService: AuthService, private router: Router) {}
+  escuelaLogo = '';
 
   ngOnInit() {
+    this.authService.logo$.subscribe(logo => {
+      this.escuelaLogo = logo;
+    });
+
     this.loadLogos();
   }
 
@@ -24,12 +29,17 @@ export class InicioSupervisorComponent implements OnInit {
           this.authService.getEscuelaPorNombre(escuela.escuela).subscribe(
             (data) => {
               if (data.logo) {
-                const logoObservable = this.authService.getlogofile(data.logo); // Obtener el observable de la imagen
-                this.convertBlobToUrl(logoObservable).then((logoUrl) => {
-                  if (logoUrl) {
-                    this.logos.push({ nombre: escuela.escuela, logo: logoUrl });
-                  }
-                });
+                // Verificar si el logo es una URL directa o un nombre de archivo
+                if (data.logo.startsWith('http') || data.logo.startsWith('https')) {
+                  this.logos.push({ nombre: escuela.escuela, logo: data.logo });
+                } else {
+                  const logoObservable = this.authService.getlogofile(data.logo); // Obtener el observable de la imagen
+                  this.convertBlobToUrl(logoObservable).then((logoUrl) => {
+                    if (logoUrl) {
+                      this.logos.push({ nombre: escuela.escuela, logo: logoUrl });
+                    }
+                  });
+                }
               }
             },
             (error) => {

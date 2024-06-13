@@ -1,0 +1,32 @@
+<div class="dialog-container">
+    <h2 class="dialog-title">Modificar Usuario</h2>
+  
+    <div class="dialog-text">
+      <label for="Username" class="input-label">Username:</label>
+      <input type="text" id="Username" [(ngModel)]="nuevousername" class="password-input" placeholder="Username del supervisor">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="Nombre" class="input-label">Nombre:</label>
+      <input type="text" id="Nombre" [(ngModel)]="nuevoname" class="password-input" placeholder="Nombre del supervisor">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="Password" class="input-label">Password:</label>
+      <input type="text" id="Password" [(ngModel)]="nuevopassword" class="password-input" placeholder="Password del supervisor">
+    </div>
+  
+    <div class="dialog-text">
+      <label for="Estado" class="input-label">Estado:</label>
+      <input type="text" id="Estado" [(ngModel)]="nuevoestado" class="password-input" placeholder="Estado del supervisor">
+    </div>
+
+  
+
+    <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+    
+    <div class="button-container">
+      <button class="cancel-button" (click)="cancelar()">Cancelar</button>
+      <button class="confirm-button" (click)="confirmar()">Guardar Cambios</button>
+    </div>
+  </div>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./user.component.css">
+    <link rel="stylesheet" href="./datos-supervisor.component.css">
     <script src="https://kit.fontawesome.com/a5b7ce8541.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -11,33 +11,21 @@
         <div class="form-group">
             <div class="form-row" style="margin-top: 80px;">
                 <div class="form-header">
-                    <h2>Usuarios</h2>
+                    <h2>Datos Supervisor</h2>
                 </div>
             </div>
             <div class="form-row" style="border-bottom: 2px solid lightgray; margin-top: 10px;">
-                <div class="search-container">
-                    <input type="text" class="search-input" placeholder="Buscar..." [(ngModel)]="filtro" (keyup)="aplicarFiltro()">
-                    <div class="combo-box-container">
-                        <select class="combo-box" [(ngModel)]="filtroSeleccionado" (change)="aplicarFiltro()">
-                            <option value="id">ID</option>
-                            <option value="rol">Rol</option>
-                        
-                        </select>
-                    </div>
-                </div>
+          
             </div>
             <table>
                 <thead>
                     <tr>
                       <th>ID</th>
+                      <th>Rol</th>
                       <th>Username</th>
                       <th>Nombre</th>
-
-                      <th>Apellido</th>
-                      <th>Tel</th>
-                      <th>Email</th>
-                 
-                      <th>Rol</th>
+                      <th>Contraseña</th>
+                      <th>Estado</th>
                       <th>
                         <button class="btn"  [routerLink]="['/crear-usuarios']" style="background-color: #4CAF50; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
                             <i class="fa-solid fa-plus"></i>
@@ -48,32 +36,20 @@
                 <tbody>
                      <tr *ngFor="let usuario of usuarios">
                     <td>{{ usuario.id }}</td>
+                    <td>{{ usuario.rol }}</td>
                     <td>{{ usuario.username }}</td>
                     <td>{{ usuario.name }}</td>
-                    <td>{{ usuario.last_name }}</td>
-                    <td>{{ usuario.tel }}</td>
-                    <td>{{ usuario.email }}</td>
-           
-                    <td>{{ usuario.rol }}</td>
+                    <td>{{ usuario.password }}</td>
+                    <td>{{ usuario.estado }}</td>
+   
                         <td>
                         <div  style="display: flex; flex-direction: row;">
-                            <button *ngIf="usuario.rol !== 'director'" mat-button (click)="openModificarUsuariorol(usuario)" class="btn" style="background-color: #d6a419; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">                                
-                                <mat-icon>account_circle</mat-icon>
-                            </button>
-
                         <button mat-icon-button (click)="openModificarUsuario(usuario)" class="btn" style="background-color: rgb(223, 223, 26); border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">
-                            <mat-icon>settings</mat-icon>
+                            <mat-icon>account_circle</mat-icon>
                         </button>
                         
                         </div>
-                        <button *ngIf="usuario.rol !== 'director'" mat-button (click)="openConfirmationDialog(usuario.id)" class="btn" style="background-color: #f44336; border-radius: 25px; color: white; border: none; padding: 10px 20px; text-align: center; text-decoration: none; display: inline-block; font-size: 16px; margin: 4px 2px; cursor: pointer;">                                
-                            <mat-icon>delete</mat-icon> 
-                        </button>
-
-
-                       
-
-                      
+           
                         </td>
                     </tr>
                 </tbody>

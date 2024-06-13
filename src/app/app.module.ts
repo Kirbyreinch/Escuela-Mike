@@ -49,6 +49,8 @@ import { PruebasComponent } from './pruebas/pruebas.component';
 import { InicioSupervisorComponent } from './inicio-supervisor/inicio-supervisor.component';
 import { EscuelasSupervisorComponent } from './escuelas-supervisor/escuelas-supervisor.component';
 import { CrearUsuariosSupervisorComponent } from './crear-usuarios-supervisor/crear-usuarios-supervisor.component';
+import { DatosSupervisorComponent } from './datos-supervisor/datos-supervisor.component';
+import { ModificarDatosSupervisorComponent } from './modificar-datos-supervisor/modificar-datos-supervisor.component';
 
 
 @NgModule({
@@ -83,7 +85,9 @@ import { CrearUsuariosSupervisorComponent } from './crear-usuarios-supervisor/cr
     PruebasComponent,
     InicioSupervisorComponent,
     EscuelasSupervisorComponent,
-    CrearUsuariosSupervisorComponent
+    CrearUsuariosSupervisorComponent,
+    DatosSupervisorComponent,
+    ModificarDatosSupervisorComponent
   ],
   imports: [
     BrowserModule,

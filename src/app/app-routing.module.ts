@@ -18,6 +18,7 @@ import { DocumentoComponent } from './documento/documento.component';
 import { InicioSupervisorComponent } from './inicio-supervisor/inicio-supervisor.component';
 import { EscuelasSupervisorComponent } from './escuelas-supervisor/escuelas-supervisor.component';
 import { CrearUsuariosSupervisorComponent } from './crear-usuarios-supervisor/crear-usuarios-supervisor.component';
+import { DatosSupervisorComponent } from './datos-supervisor/datos-supervisor.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -37,8 +38,8 @@ const routes: Routes = [
 
 
   { path: 'supervisor_escuelas', component: EscuelasSupervisorComponent},
-
-
+  { path: 'datos_supervisor', component: DatosSupervisorComponent},
+  
 
   { path: 'crear-usuarios', component: CrearUsuariosComponent},
   { path: 'crear-escuela', component: CrearEscuelaComponent},

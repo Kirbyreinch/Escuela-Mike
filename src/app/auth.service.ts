@@ -76,6 +76,12 @@ export class AuthService {
     return this.http.get<any[]>(url);
   }
 
+  getsupervisor(): Observable<any[]> {
+    const url = `${this.apiurl}/supervisor/consulta/id/1`; 
+    return this.http.get<any[]>(url);
+  }
+
+
 
   getDirectoresPorEscuela(escuela: string): Observable<any[]> {
     const url = `${this.apiurl}/users/info/consulta/escuela/${escuela}?activate=true`;
@@ -545,6 +551,22 @@ modificarUsuario(id: string, nuevoname: string, nuevolast_name: string, nuevoEma
   };
   return this.http.put(url, body);
 }
+
+
+
+
+
+modificarSupervisor(originalName: string, nuevousername: string, nuevoname: string, nuevopassword: string, nuevoestado: string): Observable<any> {
+  const url = `${this.apiurl}/supervisor/actualizar/?name=${originalName}`;
+  const body = {
+    username: nuevousername,
+    name: nuevoname,
+    password: nuevopassword,
+    estado: nuevoestado,
+  };
+  return this.http.put(url, body);
+}
+
 
 
 modificaralumnado(escuela_nombre: string, nuevo_NoFamilia: string, nuevo_Cuota: string, nuevo_TTAlumnos: string, nuevo_TTGrupos: string, nuevo_Turno: string): Observable<any> {
